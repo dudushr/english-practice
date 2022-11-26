@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
-import { EnglishWordComponent } from './english-word/english-word.component';
+import { EnglishWordComponent } from './dictionary/english-word/english-word.component';
 import { EnglishPracticeComponent } from './english-practice/english-practice.component';
 import { EnglishPracticeMenuComponent } from './english-practice-menu/english-practice-menu.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -14,11 +14,13 @@ import { DictionaryComponent } from './dictionary/dictionary/dictionary.componen
 @NgModule({
   declarations: [
     AppComponent,
-    NxWelcomeComponent,
-    EnglishWordComponent,
-    DictionaryComponent,
+    NxWelcomeComponent,    
   ],
-  imports: [BrowserModule, MatTabsModule, EnglishPracticeMenuModule],
+  imports: [
+    BrowserModule, 
+    MatTabsModule, 
+    EnglishPracticeMenuModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

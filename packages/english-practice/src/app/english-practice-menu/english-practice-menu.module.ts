@@ -6,11 +6,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
-
-
+import { DictionaryManagerComponent } from './dictionary-manager/dictionary-manager.component';
 
 @NgModule({
-  declarations: [EnglishPracticeMenuComponent],
+  declarations: [EnglishPracticeMenuComponent, DictionaryManagerComponent],
   imports: [
     CommonModule,
     EnglishPracticeModule,
@@ -18,8 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     BrowserModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
   ],
-  exports: [EnglishPracticeMenuComponent]
+  exports: [EnglishPracticeMenuComponent],
 })
-export class EnglishPracticeMenuModule { }
+export class EnglishPracticeMenuModule {}

@@ -1,0 +1,37 @@
+
+<mat-tab-group animationDuration="0ms" #myTabs>
+    <mat-tab label="אימון" >
+        <ng-template mat-tab-label> 
+            <span class="menu-button {{myTabs.selectedIndex === 0 ? 'selectedButton' : 'unselectedButton'}}" > 
+                אימון
+            </span>
+        </ng-template>
+        
+        <myorg-english-practice></myorg-english-practice>
+
+    </mat-tab>
+
+
+    <mat-tab label="Second">
+        <ng-template mat-tab-label> 
+            <span class="menu-button {{myTabs.selectedIndex === 1 ? 'selectedButton' : 'unselectedButton'}}" > 
+                אוצר מילים
+            </span>
+        </ng-template>
+
+        Content 2
+    </mat-tab>
+
+
+
+    <mat-tab label="Third">
+        <ng-template mat-tab-label> 
+            <span class="menu-button {{myTabs.selectedIndex === 2 ? 'selectedButton' : 'unselectedButton'}}" > 
+                סטטיסטיקה
+            </span>
+        </ng-template>
+        Content 3
+    </mat-tab>
+  </mat-tab-group>
+
+

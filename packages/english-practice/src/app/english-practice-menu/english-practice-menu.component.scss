@@ -1,0 +1,33 @@
+.mat-tab-label{
+    background:aqua;
+    color: blue;
+    width: 60px;
+    height: 50px;
+    font-size: 20px;
+  }
+  .mat-tab-group.mat-primary .mat-ink-bar{
+    background: brown;
+    height: 5px;
+  } 
+
+
+  .menu-button {
+    padding: 0 6px 0 6px;
+    margin: 6px 8px 6px 8px;
+    min-width: 88px;
+    border-radius: 3px;
+    font-size: 36px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration:none;
+    border: none;
+    outline: none;    
+  }
+
+  .selectedButton{
+    background-color: blue ;
+  }
+
+  .unselectedButton{
+    background-color: aqua;
+  }

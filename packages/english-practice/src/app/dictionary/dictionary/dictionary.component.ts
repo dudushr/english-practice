@@ -32,4 +32,8 @@ export class DictionaryComponent implements OnInit {
 
     return false;
   }
+
+  public getDictionary(): Array<EnglishWordComponent>{
+    return this.dictionary;
+  }
 }

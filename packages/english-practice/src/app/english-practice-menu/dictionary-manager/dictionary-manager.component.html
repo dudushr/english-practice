@@ -1,1 +1,16 @@
 <p>dictionary-manager works!</p>
+
+<div>
+    English: <input [value]="newWord.englishWord" (keyup)="onKeyEnglishWord($event)" />
+    Hebrew:  <myorg-hebrew-text-field (keyUp)="newWord.hebrewWord=[$event]"></myorg-hebrew-text-field>
+    <button mat-button color="primary" (click)="addNewWord()">Add</button>
+</div>
+
+
+<br/><br/><br/>
+
+<div *ngFor="let word of dictionary.getDictionary()">
+    <div>
+        {{word.englishWord}} - {{ word.hebrewWord }}
+    </div>
+</div>

@@ -13,4 +13,12 @@ export class EnglishWordComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  public clone(): EnglishWordComponent{
+    let cloneWord = new EnglishWordComponent();
+    cloneWord.englishWord = this.englishWord;
+    cloneWord.hebrewWord = this.hebrewWord;
+
+    return cloneWord;
+  }
 }

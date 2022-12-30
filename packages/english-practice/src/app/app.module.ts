@@ -10,6 +10,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { EnglishPracticeModule } from './english-practice/english-practice.module';
 import { EnglishPracticeMenuModule } from './english-practice-menu/english-practice-menu.module';
 import { DictionaryComponent } from './dictionary/dictionary/dictionary.component';
+import { UiComponentsModule } from '@myorg/ui-components';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DictionaryComponent } from './dictionary/dictionary/dictionary.componen
   imports: [
     BrowserModule, 
     MatTabsModule, 
-    EnglishPracticeMenuModule
+    EnglishPracticeMenuModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent],

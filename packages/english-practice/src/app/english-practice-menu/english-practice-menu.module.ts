@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { DictionaryManagerComponent } from './dictionary-manager/dictionary-manager.component';
+import { UiComponentsModule } from '@myorg/ui-components';
 
 @NgModule({
   declarations: [EnglishPracticeMenuComponent, DictionaryManagerComponent],
@@ -18,7 +19,9 @@ import { DictionaryManagerComponent } from './dictionary-manager/dictionary-mana
     BrowserModule,
     MatTabsModule,
     MatIconModule,
+    UiComponentsModule,
   ],
+  
   exports: [EnglishPracticeMenuComponent],
 })
 export class EnglishPracticeMenuModule {}

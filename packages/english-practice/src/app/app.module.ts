@@ -11,6 +11,7 @@ import { EnglishPracticeModule } from './english-practice/english-practice.modul
 import { EnglishPracticeMenuModule } from './english-practice-menu/english-practice-menu.module';
 import { DictionaryComponent } from './dictionary/dictionary/dictionary.component';
 import { UiComponentsModule } from '@myorg/ui-components';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { UiComponentsModule } from '@myorg/ui-components';
     BrowserModule, 
     MatTabsModule, 
     EnglishPracticeMenuModule,
-   
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

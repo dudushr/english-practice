@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { DictionaryManagerComponent } from './dictionary-manager/dictionary-manager.component';
 import { UiComponentsModule } from '@myorg/ui-components';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [EnglishPracticeMenuComponent, DictionaryManagerComponent],
@@ -15,6 +16,7 @@ import { UiComponentsModule } from '@myorg/ui-components';
     CommonModule,
     EnglishPracticeModule,
     MatTabsModule,
+    MatTableModule,
     BrowserAnimationsModule,
     BrowserModule,
     MatTabsModule,

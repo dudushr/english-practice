@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'myorg-hebrew-text-field',
@@ -6,9 +6,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./hebrew-text-field.component.scss'],
 })
 export class HebrewTextFieldComponent implements OnInit {
-  value = "";
+  @Input() value = "";
   @Output() keyUp = new EventEmitter<string>();
-
+  @Output() enterPressed = new EventEmitter<string>();
   
 
   ngOnInit(): void {
@@ -16,8 +16,12 @@ export class HebrewTextFieldComponent implements OnInit {
   }
 
   onKeyHebrewWord($event: any){
-    this.value = this.getHebrewString($event.target.value);
-    this.keyUp.emit(this.value);
+    if($event.code == "Enter"){
+      this.enterPressed.emit(this.value);
+    }else{
+      this.value = this.getHebrewString($event.target.value);
+      this.keyUp.emit(this.value);
+    }
   }
 
   getHebrewString(str: string): string{

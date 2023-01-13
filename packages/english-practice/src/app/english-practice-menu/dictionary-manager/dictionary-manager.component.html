@@ -1,16 +1,36 @@
 <p>dictionary-manager works!</p>
 
 <div>
-    English: <input [value]="newWord.englishWord" (keyup)="onKeyEnglishWord($event)" />
-    Hebrew:  <myorg-hebrew-text-field (keyUp)="newWord.hebrewWord=[$event]"></myorg-hebrew-text-field>
+    English: <input #txtEnglishWord [value]="newWord.englishWord" (keyup)="onKeyEnglishWord($event)" />
+    Hebrew:  <myorg-hebrew-text-field [value]="newWord.hebrewWord[0]" (keyUp)="newWord.hebrewWord=[$event]" (enterPressed)="addNewWord()"></myorg-hebrew-text-field>
     <button mat-button color="primary" (click)="addNewWord()">Add</button>
-</div>
+</div> 
 
 
 <br/><br/><br/>
 
-<div *ngFor="let word of dictionary.getDictionary()">
-    <div>
-        {{word.englishWord}} - {{ word.hebrewWord }}
-    </div>
-</div>
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="English">
+      <th mat-header-cell *matHeaderCellDef > No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.englishWord}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="Hebrew">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.hebrewWord}} </td>
+    </ng-container>
+  
+   
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

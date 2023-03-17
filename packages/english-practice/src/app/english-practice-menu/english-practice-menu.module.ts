@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { DictionaryManagerComponent } from './dictionary-manager/dictionary-manager.component';
 import { UiComponentsModule } from '@myorg/ui-components';
 import { MatTableModule } from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [EnglishPracticeMenuComponent, DictionaryManagerComponent],
@@ -22,6 +23,7 @@ import { MatTableModule } from '@angular/material/table';
     MatTabsModule,
     MatIconModule,
     UiComponentsModule,
+    HttpClientModule,
   ],
   
   exports: [EnglishPracticeMenuComponent],

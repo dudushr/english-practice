@@ -1,5 +1,4 @@
-<p>dictionary-manager works!</p>
-
+<br><br><br>
 <div>
     English: <input #txtEnglishWord [value]="newWord.englishWord" (keyup)="onKeyEnglishWord($event)" />
     Hebrew:  <myorg-hebrew-text-field [value]="newWord.hebrewWord[0]" (keyUp)="newWord.hebrewWord=[$event]" (enterPressed)="addNewWord()"></myorg-hebrew-text-field>
@@ -27,6 +26,13 @@
     <ng-container matColumnDef="Hebrew">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.hebrewWord}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Remove">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" >
+        <button mat-button (click)="removeWord(element.englishWord)">Remove</button>
+      </td>
     </ng-container>
   
    

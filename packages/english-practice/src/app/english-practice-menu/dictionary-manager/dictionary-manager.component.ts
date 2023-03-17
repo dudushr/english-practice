@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ export class DictionaryManagerComponent  implements OnInit {
   dictionary: DictionaryComponent = new DictionaryComponent();
   newWord: EnglishWordComponent = new EnglishWordComponent();
   dataSource : EnglishWordComponent[] = [ ];
-  displayedColumns: string[] = ['English', 'Hebrew'];
+  displayedColumns: string[] = ['English', 'Hebrew', 'Remove'];
   _jsonURL = "dictionary.json"
 
   @ViewChild(MatTable)
@@ -25,10 +25,9 @@ export class DictionaryManagerComponent  implements OnInit {
 
   ngOnInit(): void {
     console.log("Start");
-    fetch('assets/dictionary.json').then(res => res.json())
-    .then(jsonData => {
-      console.log(jsonData);
-      const wordsList = jsonData.dictionary.wordsList;
+    this.dataSource = [];
+    this.http.get("http://localhost:8080/dictionary/get").subscribe(request =>{
+      const wordsList = (request as any).dictionary.wordsList;
       wordsList.forEach((word: any) => {
         console.log(word);
         this.dictionary.addWord(word);
@@ -36,7 +35,7 @@ export class DictionaryManagerComponent  implements OnInit {
       });
       this.table.renderRows();
     });
-
+  
     this.newWord.hebrewWord = new Array<string>();
     this.newWord.hebrewWord.push("");
   }
@@ -58,6 +57,28 @@ export class DictionaryManagerComponent  implements OnInit {
     this.dataSource .push(this.newWord.clone());
     this.table.renderRows();
 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'my-auth-token'
+      })
+    };
+
+    const httpParams = new HttpParams()
+    .append("englishWord", this.newWord.englishWord)
+    .append("hebrewWord", this.newWord.hebrewWord[0]);
+    
+
+    this.http.post("http://localhost:8080/dictionary/add", httpParams, httpOptions).subscribe(request =>{
+      const wordsList = (request as any).dictionary.wordsList;
+      wordsList.forEach((word: any) => {
+        console.log(word);
+        this.dictionary.addWord(word);
+        this.dataSource .push(word);
+      });
+      this.table.renderRows();
+    });
+
     this.cleanFields();
   }
 
@@ -75,6 +96,38 @@ export class DictionaryManagerComponent  implements OnInit {
     this.newWord.hebrewWord.push("");
 
     this.txtEnglishWord.nativeElement.focus();
+  }
+
+  getDictionary(){
+    fetch('assets/dictionary.json').then(res => res.json())
+    .then(jsonData => {
+      console.log(jsonData);
+      const wordsList = jsonData.dictionary.wordsList;
+      wordsList.forEach((word: any) => {
+        console.log(word);
+        this.dictionary.addWord(word);
+        this.dataSource .push(word);
+      });
+      this.table.renderRows();
+    });
+  }
+
+  removeWord(englishWord: string): void{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'my-auth-token'
+      })
+    };
+
+    const httpParams = new HttpParams()
+    .append("englishWord", englishWord);
+   
+    this.http.post("http://localhost:8080/dictionary/remove", httpParams, httpOptions).subscribe(request =>{
+      this.ngOnInit();
+      
+      this.table.renderRows();
+    });
   }
 
 }

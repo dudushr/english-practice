@@ -36,4 +36,14 @@ export class DictionaryComponent implements OnInit {
   public getDictionary(): Array<EnglishWordComponent>{
     return this.dictionary;
   }
+
+  public createDictation(numOfWords: number): Array<EnglishWordComponent>{
+    const dictation = new Array<EnglishWordComponent>();
+
+    for(let i=0; i<Math.min(numOfWords, this.dictionary.length); i++){
+      dictation.push(this.dictionary[i]);
+    }
+
+    return dictation;
+  }
 }

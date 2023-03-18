@@ -15,7 +15,7 @@ export class DictionaryManagerComponent  implements OnInit {
   dictionary: DictionaryComponent = new DictionaryComponent();
   newWord: EnglishWordComponent = new EnglishWordComponent();
   dataSource : EnglishWordComponent[] = [ ];
-  displayedColumns: string[] = ['English', 'Hebrew', 'Remove'];
+  displayedColumns: string[] = ['English', 'Hebrew', 'Level', 'Date', 'Remove'];
   _jsonURL = "dictionary.json"
 
   @ViewChild(MatTable)
@@ -29,9 +29,10 @@ export class DictionaryManagerComponent  implements OnInit {
     this.http.get("http://localhost:8080/dictionary/get").subscribe(request =>{
       const wordsList = (request as any).dictionary;
       wordsList.forEach((word: any) => {
-        console.log(word);
-        this.dictionary.addWord(word);
-        this.dataSource .push(word);
+        const wordToPush = new EnglishWordComponent();
+        wordToPush.initWord(word);
+        this.dictionary.addWord(wordToPush);
+        this.dataSource .push(wordToPush);
       });
       this.table.renderRows();
     });

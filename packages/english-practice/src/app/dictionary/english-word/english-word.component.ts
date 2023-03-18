@@ -12,6 +12,7 @@ export class EnglishWordComponent implements OnInit {
   englishWord = "";
   hebrewWord: Array<string> = new Array<string>();
   level = 0;
+  lastDictationDate = new Date();
 
 
   constructor() {
@@ -35,6 +36,10 @@ export class EnglishWordComponent implements OnInit {
     this.hebrewWord[0] = word.hebrewWord;
     if(word.level){
       this.level = word.level;
+    }
+
+    if(word.lastDictationDate){
+      this.lastDictationDate = word.lastDictationDate;
     }
   }
 

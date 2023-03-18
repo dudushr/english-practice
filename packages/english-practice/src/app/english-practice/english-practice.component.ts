@@ -14,6 +14,7 @@ export class EnglishPracticeComponent implements OnInit {
   public static WAITING_FOR_QUESTION = 0;
 
   dictionary: DictionaryComponent = new DictionaryComponent();
+  dictation: Array<EnglishWordComponent> = new Array<EnglishWordComponent>();
   currentQuestionWordIndex = 0;
   currentQuestionWord: EnglishWordComponent = new EnglishWordComponent();
   currentAnswernWord: EnglishWordComponent = new EnglishWordComponent();
@@ -31,6 +32,7 @@ export class EnglishPracticeComponent implements OnInit {
         const wordToPush = new EnglishWordComponent();
         wordToPush.initWord(word);
         this.dictionary.addWord(wordToPush);
+        this.dictation = this.dictionary.createDictation(3);
       });
 
       this.currentQuestionWord = this.dictionary.getDictionary()[this.currentQuestionWordIndex];
@@ -43,24 +45,25 @@ export class EnglishPracticeComponent implements OnInit {
     console.log("Check...");
     if(this.status != EnglishPracticeComponent.WAITING_FOR_QUESTION){
       this.nextQuestion();
-    }else{
-      this.currentQuestionWord.test();
+    }else{      
         if(this.currentAnswernWord.hebrewWord[0].trim() != ""){
           if(this.currentQuestionWord.hebrewWord[0] == this.currentAnswernWord.hebrewWord[0]){
             this.message = "תשובה נכונה!!!"
             this.status = EnglishPracticeComponent.ANSWER_CORRECT;
             this.currentQuestionWord.updateLevel(EnglishWordComponent.SUCCESS);
+            this.currentQuestionWord.lastDictationDate = new Date();
           }else{
             this.message = "טעות - התשובה הנכונה היא: " + this.currentQuestionWord.hebrewWord;
             this.status = EnglishPracticeComponent.ANSWER_MISTAKE;
             this.currentQuestionWord.updateLevel(EnglishWordComponent.WRONG);
+            this.currentQuestionWord.lastDictationDate = new Date();
           }
         }
     }
   }
 
   nextQuestion(){
-    this.currentQuestionWord = this.dictionary.getDictionary()[++this.currentQuestionWordIndex];
+    this.currentQuestionWord = this.dictation[++this.currentQuestionWordIndex];
     this.currentAnswernWord = new EnglishWordComponent();
     this.status = EnglishPracticeComponent.WAITING_FOR_QUESTION;
     this.message = "";

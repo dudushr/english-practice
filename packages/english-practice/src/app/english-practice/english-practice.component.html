@@ -1,14 +1,28 @@
 <div style="height: 100px">
-
+    <br/><br/>
+    &nbsp;&nbsp;<button (click)="saveDictionary()" >שמירה</button>
 </div>
 
 <div style="width:100%; text-align: center" >
     <!--div style="text-align: center; width:70%; font-weight: bold; font-size: x-large;" >English Practice</div-->    
     <div style="height:60%;display: inline-table"></div>
     <div style="text-align: center; width:40%; display: inline-table" >
-        <div class="englishWord">{{currentWord.englishWord}}:</div>
+        <div class="englishWord">{{currentQuestionWord.englishWord}}:</div>
         <div style="text-align: left;">&nbsp;&nbsp;</div>
-        <div style="text-align: left;"><input size="20"/></div>
+        <div style="text-align: left;">
+            <myorg-hebrew-text-field [value]="currentAnswernWord.hebrewWord[0]" (keyUp)="currentAnswernWord.hebrewWord=[$event]" (enterPressed)="checkAnswer()"></myorg-hebrew-text-field>
+        </div>
 
+        <div style="text-align: left;">&nbsp;&nbsp;</div>
+        <div style="text-align: left;">&nbsp;&nbsp;</div>
+
+        <div style="text-align: left;" class="{{(status === 1) ? 'correctAnswer' : 'wrongAnswer'}}">{{message}}</div>
+
+        <div style="text-align: left;">&nbsp;&nbsp;</div>
+        <div style="text-align: left;">&nbsp;&nbsp;</div>
+
+        <div style="text-align: left;" [hidden]="status === 0">
+            <button ng-show="status != 0" (click)="nextQuestion()" >לשאלה הבאה</button>
+        </div>
     </div>
 </div>

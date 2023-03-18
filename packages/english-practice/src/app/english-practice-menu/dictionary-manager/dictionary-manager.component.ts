@@ -27,7 +27,7 @@ export class DictionaryManagerComponent  implements OnInit {
     console.log("Start");
     this.dataSource = [];
     this.http.get("http://localhost:8080/dictionary/get").subscribe(request =>{
-      const wordsList = (request as any).dictionary.wordsList;
+      const wordsList = (request as any).dictionary;
       wordsList.forEach((word: any) => {
         console.log(word);
         this.dictionary.addWord(word);

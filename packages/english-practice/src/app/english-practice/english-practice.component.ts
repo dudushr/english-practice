@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DictationWordComponent } from '../dictation/dictation-word/dictation-word.component';
+import { DictationComponent } from '../dictation/dictation.component';
 import { DictionaryComponent } from '../dictionary/dictionary/dictionary.component';
 import { EnglishWordComponent } from '../dictionary/english-word/english-word.component';
 
@@ -14,7 +16,7 @@ export class EnglishPracticeComponent implements OnInit {
   public static WAITING_FOR_QUESTION = 0;
 
   dictionary: DictionaryComponent = new DictionaryComponent();
-  dictation: Array<EnglishWordComponent> = new Array<EnglishWordComponent>();
+  dictation: DictationComponent = new DictationComponent();
   currentQuestionWordIndex = 0;
   currentQuestionWord: EnglishWordComponent = new EnglishWordComponent();
   currentAnswernWord: EnglishWordComponent = new EnglishWordComponent();
@@ -31,9 +33,10 @@ export class EnglishPracticeComponent implements OnInit {
         console.log(word);
         const wordToPush = new EnglishWordComponent();
         wordToPush.initWord(word);
-        this.dictionary.addWord(wordToPush);
-        this.dictation = this.dictionary.createDictation(3);
+        this.dictionary.addWord(wordToPush);        
       });
+
+      this.dictation.add(this.dictionary.createDictation(3));
 
       this.currentQuestionWord = this.dictionary.getDictionary()[this.currentQuestionWordIndex];
     })
@@ -52,21 +55,27 @@ export class EnglishPracticeComponent implements OnInit {
             this.status = EnglishPracticeComponent.ANSWER_CORRECT;
             this.currentQuestionWord.updateLevel(EnglishWordComponent.SUCCESS);
             this.currentQuestionWord.lastDictationDate = new Date();
+            this.dictation.updateStatus(DictationWordComponent.CORRECT_ANSWER);
           }else{
             this.message = "טעות - התשובה הנכונה היא: " + this.currentQuestionWord.hebrewWord;
             this.status = EnglishPracticeComponent.ANSWER_MISTAKE;
             this.currentQuestionWord.updateLevel(EnglishWordComponent.WRONG);
             this.currentQuestionWord.lastDictationDate = new Date();
+            this.dictation.updateStatus(DictationWordComponent.WRONG_ANSWER);
           }
         }
     }
   }
 
   nextQuestion(){
-    this.currentQuestionWord = this.dictation[++this.currentQuestionWordIndex];
-    this.currentAnswernWord = new EnglishWordComponent();
-    this.status = EnglishPracticeComponent.WAITING_FOR_QUESTION;
-    this.message = "";
+    if(this.dictation.hasNext()){
+      this.currentQuestionWord = this.dictation.getNext();
+      this.currentAnswernWord = new EnglishWordComponent();
+      this.status = EnglishPracticeComponent.WAITING_FOR_QUESTION;
+      this.message = "";
+    }else{
+      this.message = "סיימת את ההכתבה"
+    }
   }
 
 

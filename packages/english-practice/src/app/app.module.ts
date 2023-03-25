@@ -12,15 +12,13 @@ import { EnglishPracticeMenuModule } from './english-practice-menu/english-pract
 import { DictionaryComponent } from './dictionary/dictionary/dictionary.component';
 import { UiComponentsModule } from '@myorg/ui-components';
 import { HttpClientModule } from '@angular/common/http';
+import { DictationComponent } from './dictation/dictation.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NxWelcomeComponent,    
-  ],
+  declarations: [AppComponent, NxWelcomeComponent, DictationComponent],
   imports: [
-    BrowserModule, 
-    MatTabsModule, 
+    BrowserModule,
+    MatTabsModule,
     EnglishPracticeMenuModule,
     HttpClientModule,
   ],

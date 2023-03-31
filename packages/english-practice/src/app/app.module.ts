@@ -13,6 +13,9 @@ import { DictionaryComponent } from './dictionary/dictionary/dictionary.componen
 import { UiComponentsModule } from '@myorg/ui-components';
 import { HttpClientModule } from '@angular/common/http';
 import { DictationComponent } from './dictation/dictation.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent, DictationComponent],
@@ -21,8 +24,12 @@ import { DictationComponent } from './dictation/dictation.component';
     MatTabsModule,
     EnglishPracticeMenuModule,
     HttpClientModule,
+    MatDialogModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  
 })
 export class AppModule {}

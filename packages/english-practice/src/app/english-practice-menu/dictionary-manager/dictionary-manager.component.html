@@ -40,6 +40,13 @@
       <td mat-cell *matCellDef="let element"> {{element.lastDictationDate | date:'dd/MM/yyyy HH:mm'}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="Edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" >
+        <button mat-button (click)="editWord(element.englishWord)">Edit</button>
+      </td>
+    </ng-container>
+    
     <ng-container matColumnDef="Remove">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element" >

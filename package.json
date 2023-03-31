@@ -14,6 +14,8 @@
     "@angular/platform-browser": "~14.2.0",
     "@angular/platform-browser-dynamic": "~14.2.0",
     "@angular/router": "~14.2.0",
+    "@material/icon-button": "^15.0.0-canary.ecfee946f.0",
+    "@material/react-icon-button": "^0.15.0",
     "@nrwl/angular": "^15.0.13",
     "material": "^0.4.3",
     "rxjs": "~7.5.0",

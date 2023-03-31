@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -12,11 +12,11 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule,
+    BrowserModule,
+    FormsModule,
     MatIconModule,
     MatButtonModule, 
-
-
+   
   ]
 })
-export class DictionaryManagerModule { }
+export class WordEditorModule { }

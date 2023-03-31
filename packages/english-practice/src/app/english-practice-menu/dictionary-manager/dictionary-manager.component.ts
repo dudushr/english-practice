@@ -4,6 +4,8 @@ import { MatTable } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { DictionaryComponent } from '../../dictionary/dictionary/dictionary.component';
 import { EnglishWordComponent } from '../../dictionary/english-word/english-word.component';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import { WordEditorComponent } from './word-editor/word-editor.component';
 
 @Component({
   selector: 'myorg-dictionary-manager',
@@ -15,7 +17,7 @@ export class DictionaryManagerComponent  implements OnInit {
   dictionary: DictionaryComponent = new DictionaryComponent();
   newWord: EnglishWordComponent = new EnglishWordComponent();
   dataSource : EnglishWordComponent[] = [ ];
-  displayedColumns: string[] = ['English', 'Hebrew', 'Level', 'Date', 'Remove'];
+  displayedColumns: string[] = ['English', 'Hebrew', 'Level', 'Date', 'Edit', 'Remove'];
   _jsonURL = "dictionary.json"
 
   @ViewChild(MatTable)
@@ -43,7 +45,7 @@ export class DictionaryManagerComponent  implements OnInit {
 
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public dialog: MatDialog) {
     this.getJSON().subscribe(data => {
      console.log(data);
     });
@@ -129,6 +131,18 @@ export class DictionaryManagerComponent  implements OnInit {
       
       this.table.renderRows();
     });
+  }
+
+  editWord(englishWord: string): void{
+    console.log('Edit....');
+
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.width = '700px';
+    dialogConfig.height = '400px';
+    dialogConfig.data = {word: englishWord};
+
+    this.dialog.open(WordEditorComponent, dialogConfig);
   }
 
 }

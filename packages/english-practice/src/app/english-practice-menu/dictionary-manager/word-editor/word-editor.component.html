@@ -1,15 +1,28 @@
 <div class="popupMargins" >
     <div>
-        English Word: <input #txtEnglishWord [value]="word" />
+        <div class="nowrap div10">English Word: </div>
+        <div class="nowrap" ><input #txtEnglishWord [value]="word" /> </div>
     </div>
 
     <div>&nbsp;</div>
 
     <div>
-        Hebrew:    
-        <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
-            <mat-icon>plus_one</mat-icon>
-         </button>
+        <div class="nowrap div10">Hebrew:   </div>
+        <div class="nowrap div60" >
+            
+        </div>
+        <div class="nowrap" >
+            <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
+                <img src="/assets/icons/plus.png" style="border: 0" width="20" height="20" alt="image">
+            </button>
+        </div>
+    </div>
+
+    <div *ngFor="let hebrewWord of hebrew">
+        <div class="nowrap div10"></div>
+        <div class="nowrap div60" >
+            <myorg-hebrew-text-field [value]="hebrewWord"></myorg-hebrew-text-field>
+        </div>
     </div>
 
 </div>

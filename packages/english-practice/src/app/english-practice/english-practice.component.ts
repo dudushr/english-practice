@@ -11,9 +11,17 @@ import { EnglishWordComponent } from '../dictionary/english-word/english-word.co
   styleUrls: ['./english-practice.component.scss'],
 })
 export class EnglishPracticeComponent implements OnInit {
+  public static DICTATION_NOT_STARTED = 0;
   public static ANSWER_CORRECT = 1;
   public static ANSWER_MISTAKE = 2;
-  public static WAITING_FOR_QUESTION = 0;
+  public static WAITING_FOR_QUESTION = 3;
+  public static DICTATION_ENDED = 5;
+
+  _DICTATION_NOT_STARTED = EnglishPracticeComponent.DICTATION_NOT_STARTED;
+  _ANSWER_CORRECT = EnglishPracticeComponent.ANSWER_CORRECT;
+  _ANSWER_MISTAKE = EnglishPracticeComponent.ANSWER_MISTAKE;
+  _WAITING_FOR_QUESTION = EnglishPracticeComponent.WAITING_FOR_QUESTION;
+  _DICTATION_ENDED = EnglishPracticeComponent.DICTATION_ENDED;
 
   dictionary: DictionaryComponent = new DictionaryComponent();
   dictation: DictationComponent = new DictationComponent();
@@ -21,7 +29,7 @@ export class EnglishPracticeComponent implements OnInit {
   currentQuestionWord: EnglishWordComponent = new EnglishWordComponent();
   currentAnswernWord: EnglishWordComponent = new EnglishWordComponent();
   message = "";
-  status = 0;
+  status = EnglishPracticeComponent.DICTATION_NOT_STARTED;
 
   constructor(private http: HttpClient) {}
 
@@ -75,6 +83,8 @@ export class EnglishPracticeComponent implements OnInit {
       this.message = "";
     }else{
       this.message = "סיימת את ההכתבה"
+      this.status = EnglishPracticeComponent.DICTATION_ENDED;
+      this.saveDictionary();
     }
   }
 
@@ -99,5 +109,13 @@ export class EnglishPracticeComponent implements OnInit {
     this.http.post("http://localhost:8080/dictionary/updateLevel", httpParams, httpOptions).subscribe(request =>{
       console.log("Updated");
     });   
+  }
+
+  showDictation(): boolean{
+    if(this.status !== EnglishPracticeComponent.DICTATION_NOT_STARTED && this.status != EnglishPracticeComponent.DICTATION_ENDED){
+      return true; 
+    }
+
+    return false;
   }
 }

@@ -1,7 +1,7 @@
 <div class="popupMargins" >
     <div>
         <div class="nowrap div10">English Word: </div>
-        <div class="nowrap" ><input #txtEnglishWord [value]="word" /> </div>
+        <div class="nowrap" ><input #txtEnglishWord [value]="word.englishWord" /> </div>
     </div>
 
     <div>&nbsp;</div>
@@ -12,16 +12,21 @@
             
         </div>
         <div class="nowrap" >
-            <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
-                <img src="/assets/icons/plus.png" style="border: 0" width="20" height="20" alt="image">
+            <button mat-mini-fab color="primary" (click)="addNewHebrewWord()">
+                <mat-icon  class="material-icons add_circle addHebrewWordButton">+</mat-icon>
+                
             </button>
         </div>
+
     </div>
 
-    <div *ngFor="let hebrewWord of hebrew">
-        <div class="nowrap div10"></div>
+    <div class="rowMargins" *ngFor="let hebrewWord of word.hebrewWord; index as indexOfelement;">
+        <div class="nowrap div10"></div> 
         <div class="nowrap div60" >
-            <myorg-hebrew-text-field [value]="hebrewWord"></myorg-hebrew-text-field>
+            <myorg-hebrew-text-field  [value]="hebrewWord"  (Blur)="updateHebrewWord(indexOfelement, $event)" ></myorg-hebrew-text-field>
+        </div>
+        <div class="nowrap" >
+            <i class="material-icons remove_circle liButton" (click)="removeWord(indexOfelement)"></i>            
         </div>
     </div>
 

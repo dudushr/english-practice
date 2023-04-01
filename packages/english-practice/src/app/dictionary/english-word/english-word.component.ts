@@ -61,4 +61,23 @@ export class EnglishWordComponent implements OnInit {
   public test(){
     console.log('Test');
   }
+
+  public addHebrewWord(hebrew: string){
+    if(this.hebrewWord[0] == ""){
+      this.hebrewWord[0] = hebrew;
+    }else{
+      this.hebrewWord.push(hebrew);
+    }
+  }
+
+  public getLastHebrewWord(): string{
+    return this.hebrewWord[this.hebrewWord.length -1];
+  }
+
+  public removeHebrewWord(index: number){
+    this.hebrewWord.splice(index, 1);
+    if(this.hebrewWord.length == 0){
+      this.hebrewWord.push("");
+    }
+  }
 }

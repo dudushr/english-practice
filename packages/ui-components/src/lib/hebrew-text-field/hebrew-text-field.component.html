@@ -1,1 +1,1 @@
-<input [value]="value"  (keyup)="onKeyHebrewWord($event)" style="text-orientation: Hebrew; direction: rtl;"/>
+<input [value]="value"  (keyup)="onKeyHebrewWord($event)" style="text-orientation: Hebrew; direction: rtl;" (blur)="onHebrewWordBlur()" />

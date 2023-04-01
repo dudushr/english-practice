@@ -9,6 +9,7 @@ export class HebrewTextFieldComponent implements OnInit {
   @Input() value = "";
   @Output() keyUp = new EventEmitter<string>();
   @Output() enterPressed = new EventEmitter<string>();
+  @Output() Blur = new EventEmitter<string>();
   
 
   ngOnInit(): void {
@@ -22,6 +23,10 @@ export class HebrewTextFieldComponent implements OnInit {
       this.value = this.getHebrewString($event.target.value);
       this.keyUp.emit(this.value);
     }
+  }
+
+  onHebrewWordBlur(){
+    this.Blur.emit(this.value);
   }
 
   getHebrewString(str: string): string{

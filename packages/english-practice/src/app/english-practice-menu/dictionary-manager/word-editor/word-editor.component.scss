@@ -1,8 +1,17 @@
 @use "@material/icon-button";
+@use "material-design-icons-iconfont";
 
 .popupMargins{
     margin: 30px 30px 30px 30px;
 } 
+
+.rowMargins{
+    margin: 20px 20px 20px 20px;
+}
+
+
+.liButton { cursor: pointer; }
+
 
 .nowrap{
     display: inline-block;
@@ -15,4 +24,8 @@
 
 .div60{
     width: 60%;
+}
+
+.addHebrewWordButton{
+    font-size: 24px;
 }

@@ -33,7 +33,7 @@ export class EnglishWordComponent implements OnInit {
 
   public initWord(word: any){
     this.englishWord = word.englishWord;
-    this.hebrewWord[0] = word.hebrewWord;
+    this.hebrewWord = word.hebrewWord;
     if(word.level){
       this.level = word.level;
     }
@@ -71,6 +71,7 @@ export class EnglishWordComponent implements OnInit {
   }
 
   public getLastHebrewWord(): string{
+    console.log("getLastHebrewWord");
     return this.hebrewWord[this.hebrewWord.length -1];
   }
 
@@ -79,5 +80,16 @@ export class EnglishWordComponent implements OnInit {
     if(this.hebrewWord.length == 0){
       this.hebrewWord.push("");
     }
+  }
+
+
+  public checkAnswer(answer: string){
+    for(let i=0; i<this.hebrewWord.length; i++){
+      if(answer === this.hebrewWord[i]){
+        return true;
+      }
+    }
+
+    return false;
   }
 }

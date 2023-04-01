@@ -1,33 +1,44 @@
 <div class="popupMargins" >
     <div>
-        <div class="nowrap div10">English Word: </div>
-        <div class="nowrap" ><input #txtEnglishWord [value]="word.englishWord" /> </div>
+        <i class="material-icons save" (click)="saveWord()"></i>
     </div>
-
-    <div>&nbsp;</div>
-
-    <div>
-        <div class="nowrap div10">Hebrew:   </div>
-        <div class="nowrap div60" >
-            
+    <div class="popupMargins">
+        <div>
+            <div class="nowrap div10">English Word: </div>
+            <div class="nowrap" ><input #txtEnglishWord [value]="word.englishWord" /> </div>
         </div>
-        <div class="nowrap" >
-            <button mat-mini-fab color="primary" (click)="addNewHebrewWord()">
-                <mat-icon  class="material-icons add_circle addHebrewWordButton">+</mat-icon>
+
+        <div>&nbsp;</div>
+
+        <div>
+            <div class="nowrap div10">Level: </div>
+            <div class="nowrap" ><input #txtEnglishWordLevel [value]="word.level" /> </div>
+        </div>
+
+        <div>&nbsp;</div>
+
+        <div>
+            <div class="nowrap div10">Hebrew:   </div>
+            <div class="nowrap div60" >
                 
-            </button>
+            </div>
+            <div class="nowrap" >
+                <button mat-mini-fab color="primary" (click)="addNewHebrewWord()">
+                    <mat-icon  class="material-icons add_circle addHebrewWordButton">+</mat-icon>
+                    
+                </button>
+            </div>
+
         </div>
 
+        <div class="rowMargins" *ngFor="let hebrewWord of word.hebrewWord; index as indexOfelement;">
+            <div class="nowrap div10"></div> 
+            <div class="nowrap div60" >
+                <myorg-hebrew-text-field  [value]="hebrewWord"  (Blur)="updateHebrewWord(indexOfelement, $event)" ></myorg-hebrew-text-field>
+            </div>
+            <div class="nowrap" >
+                <i class="material-icons remove_circle liButton" (click)="removeWord(indexOfelement)"></i>            
+            </div>
+        </div>
     </div>
-
-    <div class="rowMargins" *ngFor="let hebrewWord of word.hebrewWord; index as indexOfelement;">
-        <div class="nowrap div10"></div> 
-        <div class="nowrap div60" >
-            <myorg-hebrew-text-field  [value]="hebrewWord"  (Blur)="updateHebrewWord(indexOfelement, $event)" ></myorg-hebrew-text-field>
-        </div>
-        <div class="nowrap" >
-            <i class="material-icons remove_circle liButton" (click)="removeWord(indexOfelement)"></i>            
-        </div>
-    </div>
-
 </div>

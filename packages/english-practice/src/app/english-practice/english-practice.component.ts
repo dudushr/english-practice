@@ -50,7 +50,7 @@ export class EnglishPracticeComponent implements OnInit {
       this.nextQuestion();
     }else{      
         if(this.currentAnswernWord.hebrewWord[0].trim() != ""){
-          if(this.currentQuestionWord.hebrewWord[0] == this.currentAnswernWord.hebrewWord[0]){
+          if(this.currentQuestionWord.checkAnswer(this.currentAnswernWord.hebrewWord[0])){
             this.message = "תשובה נכונה!!!"
             this.status = EnglishPracticeComponent.ANSWER_CORRECT;
             this.currentQuestionWord.updateLevel(EnglishWordComponent.SUCCESS);

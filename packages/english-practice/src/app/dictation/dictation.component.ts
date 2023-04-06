@@ -16,6 +16,7 @@ export class DictationComponent implements OnInit {
   ngOnInit(): void {}
 
   public add(wordsList: Array<EnglishWordComponent>) {
+    this.dictation = [];
     wordsList.forEach((word: EnglishWordComponent)=>{
       const dictationWord = new DictationWordComponent(word);
     this.dictation.push(dictationWord);

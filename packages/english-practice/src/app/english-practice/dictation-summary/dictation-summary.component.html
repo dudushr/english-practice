@@ -1,8 +1,24 @@
-<div>
-    <br><br>
-    <div>ההכתבה הסתיימה</div>
+<div style="height:100%">
+    <div style="height:40%;display: inline-table">&nbsp;</div>
+    <div class="title">ההכתבה הסתיימה</div>
+
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
 
     <div>
-        <button (click)="startDictation()">האם להתחיל הכתבה חדשה?</button>
+        <button class="title" (click)="startDictation()">התחל הכתבה חדשה</button>
     </div>
+
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    
+    <div [hidden]="!showSummary" *ngFor="let dictationWord of dictationSummary.dictation">
+       
+       <div [class]="getWordSummaryClass(dictationWord)">
+            {{dictationWord.word.englishWord}} - {{ dictationWord.getHebrewWordAsString() }}
+        </div>
+
+    </div>
+
+    
 </div>

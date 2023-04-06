@@ -13,10 +13,11 @@ export class DictationWordComponent implements OnInit {
   
   word: EnglishWordComponent = new EnglishWordComponent();
   dictationStatus = DictationWordComponent.NOT_TESTED_YET;
+  correctAnswerAtFirstAttempt = true;
 
   constructor(word: EnglishWordComponent) {
     this.word = word;
-    this.dictationStatus = DictationWordComponent.NOT_TESTED_YET;
+    this.dictationStatus = DictationWordComponent.NOT_TESTED_YET;    
   }
 
   ngOnInit(): void {}
@@ -24,10 +25,31 @@ export class DictationWordComponent implements OnInit {
 
   public setDictationStatus(status: number){
     this.dictationStatus = status;
+
+    if(status === DictationWordComponent.WRONG_ANSWER){
+      this.correctAnswerAtFirstAttempt = false;
+    }
   }
 
   public getDictationStatus(){
     return this.dictationStatus;
+  }
+
+  public isCorrectAtFirstAttempt(){
+    return this.correctAnswerAtFirstAttempt;
+  }
+
+  public getHebrewWordAsString() : string{
+    const hebrewWordList = this.word.hebrewWord;
+    let hebrewWordListStr = "";
+    for(let i=0; i<hebrewWordList.length; i++){
+      hebrewWordListStr += hebrewWordList[i];
+      if(i< hebrewWordList.length - 1){
+        hebrewWordListStr += ", ";
+      }
+    }
+
+    return hebrewWordListStr;
   }
 
 }

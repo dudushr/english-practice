@@ -1,42 +1,44 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { DictionaryComponent } from '../../dictionary/dictionary/dictionary.component';
 import { EnglishWordComponent } from '../../dictionary/english-word/english-word.component';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import { WordEditorComponent } from './word-editor/word-editor.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'myorg-dictionary-manager',
   templateUrl: './dictionary-manager.component.html',
   styleUrls: ['./dictionary-manager.component.scss'],
 })
-export class DictionaryManagerComponent  implements OnInit {
-  
+export class DictionaryManagerComponent  implements OnInit {   
   dictionary: DictionaryComponent = new DictionaryComponent();
   newWord: EnglishWordComponent = new EnglishWordComponent();
-  dataSource : EnglishWordComponent[] = [ ];
+ // dataSource : EnglishWordComponent[] = [ ];
+  dataSource = new MatTableDataSource<EnglishWordComponent>();
   displayedColumns: string[] = ['English', 'Hebrew', 'Level', 'Date', 'Edit', 'Remove'];
   _jsonURL = "dictionary.json"
 
-  @ViewChild(MatTable)
-  table!: MatTable<EnglishWordComponent>;
-
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;  
+  @ViewChild(MatTable) table!: MatTable<EnglishWordComponent>;
   @ViewChild('txtEnglishWord') txtEnglishWord!: ElementRef;
 
   ngOnInit(): void {
     console.log("Start");
-    this.dataSource = [];
+    this.dataSource = new MatTableDataSource<EnglishWordComponent>();
     this.http.get("http://localhost:8080/dictionary/get").subscribe(request =>{
       const wordsList = (request as any).dictionary;
       wordsList.forEach((word: any) => {
         const wordToPush = new EnglishWordComponent();
         wordToPush.initWord(word);
         this.dictionary.addWord(wordToPush);
-        this.dataSource .push(wordToPush);
+        this.dataSource.data.push(wordToPush);
       });
+      this.dataSource.paginator = this.paginator as MatPaginator;
       this.table.renderRows();
+      
     });
   
     this.newWord.hebrewWord = new Array<string>();
@@ -51,13 +53,15 @@ export class DictionaryManagerComponent  implements OnInit {
     });
   }
 
+  
+
   public getJSON(): Observable<any> {
     return this.http.get(this._jsonURL);
   }
 
   addNewWord(){
     this.dictionary.addWord(this.newWord.clone());
-    this.dataSource .push(this.newWord.clone());
+    this.dataSource.data.push(this.newWord.clone());
     this.table.renderRows();
 
     const httpOptions = {
@@ -77,7 +81,7 @@ export class DictionaryManagerComponent  implements OnInit {
       wordsList.forEach((word: any) => {
         console.log(word);
         this.dictionary.addWord(word);
-        this.dataSource .push(word);
+        this.dataSource.data.push(word);
       });
       this.table.renderRows();
     });
@@ -109,7 +113,7 @@ export class DictionaryManagerComponent  implements OnInit {
       wordsList.forEach((word: any) => {
         console.log(word);
         this.dictionary.addWord(word);
-        this.dataSource .push(word);
+        this.dataSource.data.push(word);
       });
       this.table.renderRows();
     });

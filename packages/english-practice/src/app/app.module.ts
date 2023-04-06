@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { WordEditorModule } from './english-practice-menu/dictionary-manager/word-editor/word-editor.module';
 
+
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent, DictationComponent],
   imports: [
@@ -30,6 +31,7 @@ import { WordEditorModule } from './english-practice-menu/dictionary-manager/wor
     MatButtonModule,
     UiComponentsModule,
     WordEditorModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

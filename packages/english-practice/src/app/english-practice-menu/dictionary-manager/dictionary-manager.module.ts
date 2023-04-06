@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UiComponentsModule } from '@myorg/ui-components';
 import { DictionaryManagerComponent } from './dictionary-manager.component';
 import { WordEditorModule } from './word-editor/word-editor.module';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -20,6 +21,7 @@ import { WordEditorModule } from './word-editor/word-editor.module';
     MatButtonModule, 
     UiComponentsModule,
     WordEditorModule,
+    MatPaginatorModule,
   ],
   exports: [DictionaryManagerComponent]
 })

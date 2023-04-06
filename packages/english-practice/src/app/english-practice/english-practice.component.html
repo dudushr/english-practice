@@ -1,6 +1,10 @@
 
-<div style="height: 100px; width:100%; text-align: center" [hidden]="showDictation()">
-    <myorg-dictation-summary (onStartNewDictation)="status=_WAITING_FOR_QUESTION" ></myorg-dictation-summary>    
+<div style="height: 500px; width:100%; text-align: center" [hidden]="showDictation()">
+    <myorg-dictation-summary 
+        [dictationSummary]="dictation" 
+        [showSummary]="showSummary()"
+        (onStartNewDictation)="startNewDictation()" >
+    </myorg-dictation-summary>    
 </div>
 
 <div [hidden]="!showDictation()">

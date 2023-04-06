@@ -15,6 +15,7 @@ export class EnglishWordComponent implements OnInit {
   lastDictationDate = new Date();
 
 
+
   constructor() {
     this.ngOnInit();
   }
@@ -89,6 +90,8 @@ export class EnglishWordComponent implements OnInit {
         return true;
       }
     }
+
+    
 
     return false;
   }

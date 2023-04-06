@@ -11,6 +11,8 @@ import { UiComponentsModule } from '@myorg/ui-components';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [EnglishPracticeMenuComponent, DictionaryManagerComponent],
@@ -27,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     MatIconModule,
     MatButtonModule,
+    MatPaginatorModule,
   ],
   
   exports: [EnglishPracticeMenuComponent],

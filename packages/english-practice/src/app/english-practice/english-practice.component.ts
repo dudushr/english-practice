@@ -11,6 +11,8 @@ import { EnglishWordComponent } from '../dictionary/english-word/english-word.co
   styleUrls: ['./english-practice.component.scss'],
 })
 export class EnglishPracticeComponent implements OnInit {
+  public static NUM_OF_WORDS_IN_DICTATION = 4;
+
   public static DICTATION_NOT_STARTED = 0;
   public static ANSWER_CORRECT = 1;
   public static ANSWER_MISTAKE = 2;
@@ -44,7 +46,7 @@ export class EnglishPracticeComponent implements OnInit {
         this.dictionary.addWord(wordToPush);        
       });
 
-      this.dictation.add(this.dictionary.createDictation(3));
+      this.dictation.add(this.dictionary.createDictation(EnglishPracticeComponent.NUM_OF_WORDS_IN_DICTATION));
 
       this.currentQuestionWord = this.dictionary.getDictionary()[this.currentQuestionWordIndex];
     })
@@ -112,10 +114,30 @@ export class EnglishPracticeComponent implements OnInit {
   }
 
   showDictation(): boolean{
-    if(this.status !== EnglishPracticeComponent.DICTATION_NOT_STARTED && this.status != EnglishPracticeComponent.DICTATION_ENDED){
+    if(this.status !== EnglishPracticeComponent.DICTATION_NOT_STARTED && this.status != EnglishPracticeComponent.DICTATION_ENDED){     
       return true; 
     }
 
     return false;
+  }
+
+  showSummary(): boolean{
+    return (this.status === EnglishPracticeComponent.DICTATION_ENDED);
+  }
+
+  startNewDictation(){
+    this.dictionary = new DictionaryComponent();
+    this.dictation = new DictationComponent();
+    this.currentQuestionWordIndex = 0;
+    this.currentQuestionWord = new EnglishWordComponent();
+    this.currentAnswernWord = new EnglishWordComponent();
+    this.message = "";
+
+    this.dictation.add(this.dictionary.createDictation(EnglishPracticeComponent.NUM_OF_WORDS_IN_DICTATION));
+
+    this.currentQuestionWord = this.dictionary.getDictionary()[this.currentQuestionWordIndex];
+    
+    this.ngOnInit();
+    this.status = EnglishPracticeComponent.WAITING_FOR_QUESTION;
   }
 }

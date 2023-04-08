@@ -1,2 +1,8 @@
 
-<myorg-english-practice-menu></myorg-english-practice-menu>
+<div [hidden]="loginUser!==''">
+    <myorg-login-english-practice></myorg-login-english-practice>
+</div>
+
+<div [hidden]="loginUser===''">
+    <myorg-english-practice-menu></myorg-english-practice-menu>
+</div>

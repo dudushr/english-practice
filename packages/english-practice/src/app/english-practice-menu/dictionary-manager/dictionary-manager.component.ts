@@ -9,6 +9,7 @@ import { WordEditorComponent } from './word-editor/word-editor.component';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { LoginManagerService } from '../../services/login-manager.service';
 
 @Component({
   selector: 'myorg-dictionary-manager',
@@ -30,8 +31,10 @@ export class DictionaryManagerComponent  implements OnInit {
 
   ngOnInit(): void {
     console.log("Start");
+    
     this.dataSource = new MatTableDataSource<EnglishWordComponent>();
-    this.http.get("http://localhost:8080/dictionary/get").subscribe(request =>{
+
+    this.http.get("http://localhost:8080/dictionary/get/" + this.loginService.getUser()).subscribe(request =>{
       const wordsList = (request as any).dictionary;
       wordsList.forEach((word: any) => {
         const wordToPush = new EnglishWordComponent();
@@ -51,10 +54,8 @@ export class DictionaryManagerComponent  implements OnInit {
 
 
 
-  constructor(private http: HttpClient, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer) {
-    this.getJSON().subscribe(data => {
-     console.log(data);
-    });
+  constructor(private http: HttpClient, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, private loginService: LoginManagerService) {
+   this.loginService.setDictionaryManager(this);
   }
 
   
@@ -77,16 +78,12 @@ export class DictionaryManagerComponent  implements OnInit {
 
     const httpParams = new HttpParams()
     .append("englishWord", this.newWord.englishWord)
-    .append("hebrewWord", this.newWord.hebrewWord[0]);
+    .append("hebrewWord", this.newWord.hebrewWord[0])
+    .append("uid", this.loginService.getUser());
     
 
     this.http.post("http://localhost:8080/dictionary/add", httpParams, httpOptions).subscribe(request =>{
-      const wordsList = (request as any).dictionary.wordsList;
-      wordsList.forEach((word: any) => {
-        console.log(word);
-        this.dictionary.addWord(word);
-        this.dataSource.data.push(word);
-      });
+      this.ngOnInit();
       this.table.renderRows();
     });
 
@@ -132,7 +129,8 @@ export class DictionaryManagerComponent  implements OnInit {
     };
 
     const httpParams = new HttpParams()
-    .append("englishWord", englishWord);
+    .append("englishWord", englishWord)
+    .append("uid", this.loginService.getUser());
    
     this.http.post("http://localhost:8080/dictionary/remove", httpParams, httpOptions).subscribe(request =>{
       this.ngOnInit();
@@ -164,6 +162,9 @@ export class DictionaryManagerComponent  implements OnInit {
       sortType = "level";
     }else if(sortState.active === "Date"){
       sortType = "lastDictationDate";
+
+
+      
     }
 
 
@@ -201,5 +202,8 @@ export class DictionaryManagerComponent  implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+
+
+  
 
 }

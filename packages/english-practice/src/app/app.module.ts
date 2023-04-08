@@ -17,10 +17,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { WordEditorModule } from './english-practice-menu/dictionary-manager/word-editor/word-editor.module';
-
+import { LoginEnglishPracticeComponent } from './login-english-practice/login-english-practice.component';
+import { LoginEnglishPracticeModule } from './login-english-practice/login-english-practice.module';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent, DictationComponent],
+  declarations: [
+    AppComponent,
+    NxWelcomeComponent,
+    DictationComponent,
+    LoginEnglishPracticeComponent,
+  ],
   imports: [
     BrowserModule,
     MatTabsModule,
@@ -31,10 +39,13 @@ import { WordEditorModule } from './english-practice-menu/dictionary-manager/wor
     MatButtonModule,
     UiComponentsModule,
     WordEditorModule,
-
+    LoginEnglishPracticeModule,
+    MatSelectModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  
 })
 export class AppModule {}

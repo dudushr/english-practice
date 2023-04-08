@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginManagerService } from '../services/login-manager.service';
 
 @Component({
   selector: 'myorg-english-practice-menu',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./english-practice-menu.component.scss'],
 })
 export class EnglishPracticeMenuComponent implements OnInit {
-  constructor() {}
+  constructor(private loginService: LoginManagerService) {}
 
   ngOnInit(): void {}
 

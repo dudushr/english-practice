@@ -4,6 +4,7 @@ import { DictationWordComponent } from '../dictation/dictation-word/dictation-wo
 import { DictationComponent } from '../dictation/dictation.component';
 import { DictionaryComponent } from '../dictionary/dictionary/dictionary.component';
 import { EnglishWordComponent } from '../dictionary/english-word/english-word.component';
+import { LoginManagerService } from '../services/login-manager.service';
 
 @Component({
   selector: 'myorg-english-practice',
@@ -33,11 +34,12 @@ export class EnglishPracticeComponent implements OnInit {
   message = "";
   status = EnglishPracticeComponent.DICTATION_NOT_STARTED;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private loginService: LoginManagerService) {}
 
   ngOnInit(): void {
     console.log("Start - " + this.currentAnswernWord.hebrewWord[0]);
-    this.http.get("http://localhost:8080/dictionary/get").subscribe(request =>{
+    const uid = this.loginService.getUser();
+    this.http.get("http://localhost:8080/dictionary/get/" + uid).subscribe(request =>{
       const wordsList = (request as any).dictionary;
       wordsList.forEach((word: any) => {
         console.log(word);
@@ -104,7 +106,8 @@ export class EnglishPracticeComponent implements OnInit {
     };
 
     const httpParams = new HttpParams()
-    .append("dictionary", JSON.stringify(this.dictionary));
+    .append("dictionary", JSON.stringify(this.dictionary))
+    .append("uid", this.loginService.getUser());
     
     
 

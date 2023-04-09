@@ -31,6 +31,16 @@
         </ng-template>
         Content 3
     </mat-tab>
+
+
+    <mat-tab label="Third">
+        <ng-template mat-tab-label> 
+            <span class="menu-button {{myTabs.selectedIndex === 2 ? 'selectedButton' : 'unselectedButton'}}" > 
+                הגדרות
+            </span>
+        </ng-template>
+        <myorg-english-practice-configuration></myorg-english-practice-configuration>
+    </mat-tab>
   </mat-tab-group>
 
 

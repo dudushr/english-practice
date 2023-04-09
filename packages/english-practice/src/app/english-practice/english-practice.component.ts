@@ -5,15 +5,14 @@ import { DictationComponent } from '../dictation/dictation.component';
 import { DictionaryComponent } from '../dictionary/dictionary/dictionary.component';
 import { EnglishWordComponent } from '../dictionary/english-word/english-word.component';
 import { LoginManagerService } from '../services/login-manager.service';
+import { ConfigChanged, EnglishConfigurationService } from '../services/english-configuration.service';
 
 @Component({
   selector: 'myorg-english-practice',
   templateUrl: './english-practice.component.html',
   styleUrls: ['./english-practice.component.scss'],
 })
-export class EnglishPracticeComponent implements OnInit {
-  public static NUM_OF_WORDS_IN_DICTATION = 4;
-
+export class EnglishPracticeComponent implements OnInit, ConfigChanged {
   public static DICTATION_NOT_STARTED = 0;
   public static ANSWER_CORRECT = 1;
   public static ANSWER_MISTAKE = 2;
@@ -26,6 +25,8 @@ export class EnglishPracticeComponent implements OnInit {
   _WAITING_FOR_QUESTION = EnglishPracticeComponent.WAITING_FOR_QUESTION;
   _DICTATION_ENDED = EnglishPracticeComponent.DICTATION_ENDED;
 
+  NUM_OF_WORDS_IN_DICTATION = 4;
+
   dictionary: DictionaryComponent = new DictionaryComponent();
   dictation: DictationComponent = new DictationComponent();
   currentQuestionWordIndex = 0;
@@ -34,7 +35,11 @@ export class EnglishPracticeComponent implements OnInit {
   message = "";
   status = EnglishPracticeComponent.DICTATION_NOT_STARTED;
 
-  constructor(private http: HttpClient, private loginService: LoginManagerService) {}
+  constructor(private http: HttpClient, private loginService: LoginManagerService, private configurationService: EnglishConfigurationService) {
+    this.configurationService.addConfigChangedListener(this);
+    this.NUM_OF_WORDS_IN_DICTATION = configurationService.getNumOfWordsInDictation();
+  }
+  
 
   ngOnInit(): void {
     console.log("Start - " + this.currentAnswernWord.hebrewWord[0]);
@@ -48,7 +53,7 @@ export class EnglishPracticeComponent implements OnInit {
         this.dictionary.addWord(wordToPush);        
       });
 
-      this.dictation.add(this.dictionary.createDictation(EnglishPracticeComponent.NUM_OF_WORDS_IN_DICTATION));
+      this.dictation.add(this.dictionary.createDictation(this.NUM_OF_WORDS_IN_DICTATION));
 
       this.currentQuestionWord = this.dictionary.getDictionary()[this.currentQuestionWordIndex];
     })
@@ -137,11 +142,15 @@ export class EnglishPracticeComponent implements OnInit {
     this.currentAnswernWord = new EnglishWordComponent();
     this.message = "";
 
-    this.dictation.add(this.dictionary.createDictation(EnglishPracticeComponent.NUM_OF_WORDS_IN_DICTATION));
+    this.dictation.add(this.dictionary.createDictation(this.NUM_OF_WORDS_IN_DICTATION));
 
     this.currentQuestionWord = this.dictionary.getDictionary()[this.currentQuestionWordIndex];
     
     this.ngOnInit();
     this.status = EnglishPracticeComponent.WAITING_FOR_QUESTION;
+  }
+
+  configChangedAction(): void {
+    this.NUM_OF_WORDS_IN_DICTATION = this.configurationService.getNumOfWordsInDictation();
   }
 }

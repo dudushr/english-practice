@@ -11,12 +11,16 @@ import { UiComponentsModule } from '@myorg/ui-components';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { EnglishPracticeConfigurationComponent } from './english-practice-configuration/english-practice-configuration.component';
+import { EnglishPracticeConfigurationModule } from './english-practice-configuration/english-practice-configuration.module';
 
 @NgModule({
-  declarations: [EnglishPracticeMenuComponent, DictionaryManagerComponent],
+  declarations: [
+    EnglishPracticeMenuComponent,
+    DictionaryManagerComponent,
+  ],
   imports: [
     CommonModule,
     EnglishPracticeModule,
@@ -32,8 +36,9 @@ import {MatSortModule} from '@angular/material/sort';
     MatButtonModule,
     MatPaginatorModule,
     MatSortModule,
+    EnglishPracticeConfigurationModule,
   ],
-  
+
   exports: [EnglishPracticeMenuComponent],
 })
 export class EnglishPracticeMenuModule {}

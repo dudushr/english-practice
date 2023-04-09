@@ -1,0 +1,55 @@
+<div width="80%; text-align: center">
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+
+    <div>
+       
+        <div class="table-cell-input">
+            <mat-form-field >
+                <mat-label>Numer of words in dictation</mat-label>
+                <input #txtNumOfWordsInDictation matInput type="text" [value]="numOfWordsInDictation" (blur)="numOfWordsInDictation=txtNumOfWordsInDictation.value">                
+              </mat-form-field>
+        </div>
+    </div>
+
+    <div>
+       
+        <div class="table-cell-input">
+            <mat-form-field >
+                <mat-label>High level words</mat-label>
+                <input #txtHighLevelWords matInput type="text" [value]="highLevelWords" (blur)="highLevelWords=txtHighLevelWords.value">                
+              </mat-form-field>
+        </div>
+    </div>
+
+    <div>
+       
+        <div class="table-cell-input">
+            <mat-form-field >
+                <mat-label>Medium level words</mat-label>
+                <input #txtMediumLevelWords matInput type="text" [value]="mediumLevelWords" (blur)="mediumLevelWords=txtMediumLevelWords.value">                
+              </mat-form-field>
+        </div>
+    </div>
+
+    <div>
+        
+        <div class="table-cell-input">
+            <mat-form-field >
+                <mat-label>Low level words</mat-label>
+                <input #txtLowLevelWords matInput type="text" [value]="lowLevelWords" (blur)="lowLevelWords=txtLowLevelWords.value">                
+              </mat-form-field>
+        </div>
+    </div>
+
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+
+    <div>
+        <button (click)="saveConfig()" >
+            Save
+          </button>
+    </div>
+
+</div>

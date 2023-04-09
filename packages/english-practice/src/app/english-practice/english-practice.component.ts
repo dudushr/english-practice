@@ -67,13 +67,14 @@ export class EnglishPracticeComponent implements OnInit {
             this.status = EnglishPracticeComponent.ANSWER_CORRECT;
             this.currentQuestionWord.updateLevel(EnglishWordComponent.SUCCESS);
             this.currentQuestionWord.lastDictationDate = new Date();
-            this.dictation.updateStatus(DictationWordComponent.CORRECT_ANSWER);
+            this.dictation.updateStatus(DictationWordComponent.CORRECT_ANSWER);            
           }else{
             this.message = "טעות - התשובה הנכונה היא: " + this.currentQuestionWord.hebrewWord;
             this.status = EnglishPracticeComponent.ANSWER_MISTAKE;
             this.currentQuestionWord.updateLevel(EnglishWordComponent.WRONG);
             this.currentQuestionWord.lastDictationDate = new Date();
             this.dictation.updateStatus(DictationWordComponent.WRONG_ANSWER);
+            this.dictation.updateOriginAnswer(this.currentAnswernWord.hebrewWord[0]);
           }
         }
     }

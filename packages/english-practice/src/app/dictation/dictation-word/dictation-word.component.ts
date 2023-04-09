@@ -14,6 +14,7 @@ export class DictationWordComponent implements OnInit {
   word: EnglishWordComponent = new EnglishWordComponent();
   dictationStatus = DictationWordComponent.NOT_TESTED_YET;
   correctAnswerAtFirstAttempt = true;
+  originAnswer = "";
 
   constructor(word: EnglishWordComponent) {
     this.word = word;
@@ -51,5 +52,6 @@ export class DictationWordComponent implements OnInit {
 
     return hebrewWordListStr;
   }
+  
 
 }

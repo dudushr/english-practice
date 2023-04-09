@@ -28,6 +28,10 @@ export class DictationComponent implements OnInit {
     this.dictation[this.currentIndex].setDictationStatus(status);   
   }
 
+  public updateOriginAnswer(answer: string){
+    this.dictation[this.currentIndex].originAnswer = answer;
+  }
+
   public getNext(): EnglishWordComponent {    
     this.currentIndex++;
     if(this.currentIndex === this.dictation.length){

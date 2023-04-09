@@ -14,8 +14,11 @@
     
     <div [hidden]="!showSummary" *ngFor="let dictationWord of dictationSummary.dictation">
        
-       <div [class]="getWordSummaryClass(dictationWord)">
-            {{dictationWord.word.englishWord}} - {{ dictationWord.getHebrewWordAsString() }}
+       <div [class]="getWordSummaryClass(dictationWord)" style="width:100%">
+            <div class="table-cell-left" style="width:20%;">{{dictationWord.word.englishWord}}</div>
+            <div class="table-cell-left" > - </div>
+            <div class="table-cell-right goodAnswer" style="width: 20%;">{{ dictationWord.getHebrewWordAsString() }}</div>
+            <div class="table-cell-right" style="width: 20%;" > <div [hidden]="dictationWord.originAnswer.trim()===''">  ({{ dictationWord.originAnswer}}) </div> </div>
         </div>
 
     </div>

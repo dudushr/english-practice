@@ -10,6 +10,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { LoginManagerService } from '../../services/login-manager.service';
+import { DictionaryStatisticsComponent } from './dictionary-statistics/dictionary-statistics.component';
+import { EnglishConfigurationService } from '../../services/english-configuration.service';
 
 @Component({
   selector: 'myorg-dictionary-manager',
@@ -28,7 +30,9 @@ export class DictionaryManagerComponent  implements OnInit {
   @ViewChild(MatSort) sort: MatSort | undefined;
   @ViewChild(MatTable) table!: MatTable<EnglishWordComponent>;
   @ViewChild('txtEnglishWord') txtEnglishWord!: ElementRef;
+  @ViewChild(DictionaryStatisticsComponent) dictionaryStatisticsComponent!: DictionaryStatisticsComponent;
 
+  
   ngOnInit(): void {
     console.log("Start");
     
@@ -41,10 +45,12 @@ export class DictionaryManagerComponent  implements OnInit {
         wordToPush.initWord(word);
         this.dictionary.addWord(wordToPush);
         this.dataSource.data.push(wordToPush);
+        this.dictionaryStatisticsComponent.updateStatistics();
       });
       this.dataSource.paginator = this.paginator as MatPaginator;
       this.dataSource.sort = this.sort as MatSort;
       this.table.renderRows();
+      
       
     });
   
@@ -54,7 +60,11 @@ export class DictionaryManagerComponent  implements OnInit {
 
 
 
-  constructor(private http: HttpClient, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, private loginService: LoginManagerService) {
+  constructor(private http: HttpClient, 
+      public dialog: MatDialog, 
+      private _liveAnnouncer: LiveAnnouncer, 
+      private loginService: LoginManagerService,
+      private englishConfig: EnglishConfigurationService) {
    this.loginService.setDictionaryManager(this);
   }
 
@@ -204,6 +214,17 @@ export class DictionaryManagerComponent  implements OnInit {
   }
 
 
-  
+  getTableRowColor(level: number){         
+    let className =""
+    if(level >= this.englishConfig.highLevelWords){
+      className = "highLevel";
+    }else if(level <= this.englishConfig.lowLevelWords ){
+      className = "lowLevel";
+    }else{
+      className = "mediumLevel";
+    }
+      
+    return className;
+  }
 
 }

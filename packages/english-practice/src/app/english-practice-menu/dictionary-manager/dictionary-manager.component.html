@@ -19,25 +19,25 @@
     <!-- Position Column -->
     <ng-container matColumnDef="English" >
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by englishWord"> English </th>
-      <td mat-cell *matCellDef="let element"> {{element.englishWord}} </td>
+      <td mat-cell *matCellDef="let element" [class]="getTableRowColor(element.level)"> {{element.englishWord}} </td>
     </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="Hebrew">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by hebrewWord"> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.hebrewWord}} </td>
+      <td mat-cell *matCellDef="let element" [class]="getTableRowColor(element.level)"> {{element.hebrewWord}} </td>
     </ng-container>
 
      <!-- Level Column -->
      <ng-container matColumnDef="Level" >
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by level"> Level </th>
-      <td mat-cell *matCellDef="let element"> {{element.level}} </td>
+      <td mat-cell *matCellDef="let element" [class]="getTableRowColor(element.level)"> {{element.level}} </td>
     </ng-container>
 
     <!-- Date Column -->
     <ng-container matColumnDef="Date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by level"> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastDictationDate | date:'dd/MM/yyyy HH:mm'}} </td>
+      <td mat-cell *matCellDef="let element" [class]="getTableRowColor(element.level)"> {{element.lastDictationDate | date:'dd/MM/yyyy HH:mm'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Edit">
@@ -66,3 +66,5 @@
                  showFirstLastButtons
                  aria-label="Select page of periodic elements">
   </mat-paginator>
+
+  <myorg-dictionary-statistics [dictionary]="dictionary"></myorg-dictionary-statistics>

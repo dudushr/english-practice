@@ -15,6 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { EnglishPracticeConfigurationComponent } from './english-practice-configuration/english-practice-configuration.component';
 import { EnglishPracticeConfigurationModule } from './english-practice-configuration/english-practice-configuration.module';
+import { DictionaryStatisticsModule } from './dictionary-manager/dictionary-statistics/dictionary-statistics.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { EnglishPracticeConfigurationModule } from './english-practice-configura
     MatPaginatorModule,
     MatSortModule,
     EnglishPracticeConfigurationModule,
+    DictionaryStatisticsModule,
   ],
 
   exports: [EnglishPracticeMenuComponent],

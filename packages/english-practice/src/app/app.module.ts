@@ -22,6 +22,7 @@ import { LoginEnglishPracticeModule } from './login-english-practice/login-engli
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EnglishPracticeConfigurationModule } from './english-practice-menu/english-practice-configuration/english-practice-configuration.module';
+import { DictionaryStatisticsModule } from './english-practice-menu/dictionary-manager/dictionary-statistics/dictionary-statistics.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { EnglishPracticeConfigurationModule } from './english-practice-menu/engl
     FormsModule,
     ReactiveFormsModule,
     EnglishPracticeConfigurationModule,
+    DictionaryStatisticsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

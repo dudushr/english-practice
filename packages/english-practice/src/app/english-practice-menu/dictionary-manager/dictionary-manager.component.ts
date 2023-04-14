@@ -159,6 +159,10 @@ export class DictionaryManagerComponent  implements OnInit {
     dialogConfig.data = {word: englishWord};
 
     this.dialog.open(WordEditorComponent, dialogConfig);
+
+    this.dialog.afterAllClosed.subscribe(result => {
+      this.ngOnInit();
+    });
   }
 
 

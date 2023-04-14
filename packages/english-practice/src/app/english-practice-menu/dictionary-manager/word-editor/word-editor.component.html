@@ -12,7 +12,7 @@
 
         <div>
             <div class="nowrap div10">Level: </div>
-            <div class="nowrap" ><input #txtEnglishWordLevel [value]="word.level" /> </div>
+            <div class="nowrap" ><input #txtEnglishWordLevel [value]="word.level" (blur)="updateLevel($event)"/> </div>
         </div>
 
         <div>&nbsp;</div>

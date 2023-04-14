@@ -51,6 +51,10 @@ export class WordEditorComponent implements OnInit {
     this.word.hebrewWord[index] = hebrewTwxt;
   }
 
+  updateLevel($event: any){
+    this.word.level = $event.srcElement.value;
+  }
+
   saveWord(){
     const httpOptions = {
       headers: new HttpHeaders({

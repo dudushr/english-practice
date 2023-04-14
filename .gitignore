@@ -3,3 +3,4 @@ node_modules
 .old
 .angular/cache
 .angular
+dist

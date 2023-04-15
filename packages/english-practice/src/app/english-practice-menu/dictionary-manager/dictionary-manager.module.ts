@@ -12,6 +12,8 @@ import { DictionaryManagerComponent } from './dictionary-manager.component';
 import { WordEditorModule } from './word-editor/word-editor.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DictionaryStatisticsModule } from './dictionary-statistics/dictionary-statistics.module';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -27,6 +29,9 @@ import { DictionaryStatisticsModule } from './dictionary-statistics/dictionary-s
     WordEditorModule,
     MatPaginatorModule,
     DictionaryStatisticsModule,
+    BrowserModule,
+    FormsModule,
+    MatIconModule, 
   ],
   exports: [DictionaryManagerComponent],
 })

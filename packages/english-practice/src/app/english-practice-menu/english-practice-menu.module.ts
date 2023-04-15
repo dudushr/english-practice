@@ -16,6 +16,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { EnglishPracticeConfigurationComponent } from './english-practice-configuration/english-practice-configuration.component';
 import { EnglishPracticeConfigurationModule } from './english-practice-configuration/english-practice-configuration.module';
 import { DictionaryStatisticsModule } from './dictionary-manager/dictionary-statistics/dictionary-statistics.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,9 @@ import { DictionaryStatisticsModule } from './dictionary-manager/dictionary-stat
     MatSortModule,
     EnglishPracticeConfigurationModule,
     DictionaryStatisticsModule,
+    BrowserModule,
+    FormsModule,
+    MatIconModule, 
   ],
 
   exports: [EnglishPracticeMenuComponent],

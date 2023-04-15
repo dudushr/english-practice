@@ -1,3 +1,6 @@
+@use "@material/icon-button";
+@use "material-design-icons-iconfont";
+
 .th.mat-header-cell  {
     background-color: #59abfd;
     opacity: 1;
@@ -18,3 +21,5 @@
 .lowLevel{
     color: red;
 }
+
+.liButton { cursor: pointer; }

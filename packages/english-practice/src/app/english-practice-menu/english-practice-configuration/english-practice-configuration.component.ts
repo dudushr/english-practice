@@ -3,6 +3,7 @@ import { EnglishConfigurationService } from '../../services/english-configuratio
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginManagerService } from '../../services/login-manager.service';
 import { ConfigChanged } from '../english-practice-menu.component';
+import { EpHttpServiceService } from '../../services/ep-http-service.service';
 
 @Component({
   selector: 'myorg-english-practice-configuration',
@@ -15,7 +16,7 @@ export class EnglishPracticeConfigurationComponent implements OnInit, ConfigChan
   mediumLevelWords = "";
   lowLevelWords = "";
 
-  constructor(private http: HttpClient, private loginService: LoginManagerService, private configurationService: EnglishConfigurationService) {    
+  constructor(private http: HttpClient, private loginService: LoginManagerService, private configurationService: EnglishConfigurationService, private epService: EpHttpServiceService) {    
     this.configurationService.addConfigChangedListener(this);
     this.configurationService.refresh;
   }
@@ -40,7 +41,7 @@ export class EnglishPracticeConfigurationComponent implements OnInit, ConfigChan
     .append("lowLevelWords", JSON.stringify(this.lowLevelWords))
     .append("uid", this.loginService.getUser());
 
-    this.http.post("http://localhost:8080/english/config/save", httpParams, httpOptions).subscribe(request =>{
+    this.http.post(this.epService.getServerUrl() + "/english/config/save", httpParams, httpOptions).subscribe(request =>{
       console.log("Updated");
     });   
   }

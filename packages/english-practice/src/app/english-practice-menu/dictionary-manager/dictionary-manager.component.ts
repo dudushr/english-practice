@@ -12,6 +12,7 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { LoginManagerService } from '../../services/login-manager.service';
 import { DictionaryStatisticsComponent } from './dictionary-statistics/dictionary-statistics.component';
 import { EnglishConfigurationService } from '../../services/english-configuration.service';
+import { EpHttpServiceService } from '../../services/ep-http-service.service';
 
 @Component({
   selector: 'myorg-dictionary-manager',
@@ -38,7 +39,7 @@ export class DictionaryManagerComponent  implements OnInit {
     
     this.dataSource = new MatTableDataSource<EnglishWordComponent>();
 
-    this.http.get("http://localhost:8080/dictionary/get/" + this.loginService.getUser()).subscribe(request =>{
+    this.http.get(this.epService.getServerUrl() + "/dictionary/get/" + this.loginService.getUser()).subscribe(request =>{
       const wordsList = (request as any).dictionary;
       wordsList.forEach((word: any) => {
         const wordToPush = new EnglishWordComponent();
@@ -64,7 +65,8 @@ export class DictionaryManagerComponent  implements OnInit {
       public dialog: MatDialog, 
       private _liveAnnouncer: LiveAnnouncer, 
       private loginService: LoginManagerService,
-      private englishConfig: EnglishConfigurationService) {
+      private englishConfig: EnglishConfigurationService,
+      private epService:EpHttpServiceService) {
    this.loginService.setDictionaryManager(this);
   }
 
@@ -142,7 +144,7 @@ export class DictionaryManagerComponent  implements OnInit {
     .append("englishWord", englishWord)
     .append("uid", this.loginService.getUser());
    
-    this.http.post("http://localhost:8080/dictionary/remove", httpParams, httpOptions).subscribe(request =>{
+    this.http.post(this.epService.getServerUrl() + "/dictionary/remove", httpParams, httpOptions).subscribe(request =>{
       this.ngOnInit();
       
       this.table.renderRows();

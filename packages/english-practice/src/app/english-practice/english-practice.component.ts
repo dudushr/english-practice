@@ -6,6 +6,7 @@ import { DictionaryComponent } from '../dictionary/dictionary/dictionary.compone
 import { EnglishWordComponent } from '../dictionary/english-word/english-word.component';
 import { LoginManagerService } from '../services/login-manager.service';
 import { ConfigChanged, EnglishConfigurationService } from '../services/english-configuration.service';
+import { EpHttpServiceService } from '../services/ep-http-service.service';
 
 @Component({
   selector: 'myorg-english-practice',
@@ -35,7 +36,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
   message = "";
   status = EnglishPracticeComponent.DICTATION_NOT_STARTED;
 
-  constructor(private http: HttpClient, private loginService: LoginManagerService, private configurationService: EnglishConfigurationService) {
+  constructor(private http: HttpClient, private loginService: LoginManagerService, private configurationService: EnglishConfigurationService, private epService: EpHttpServiceService) {
     this.configurationService.addConfigChangedListener(this);
     this.NUM_OF_WORDS_IN_DICTATION = configurationService.getNumOfWordsInDictation();
   }
@@ -44,7 +45,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
   ngOnInit(): void {
     console.log("Start - " + this.currentAnswernWord.hebrewWord[0]);
     const uid = this.loginService.getUser();
-    this.http.get("http://localhost:8080/dictionary/get/" + uid).subscribe(request =>{
+    this.http.get(this.epService.getServerUrl() + "/dictionary/get/" + uid).subscribe(request =>{
       const wordsList = (request as any).dictionary;
       wordsList.forEach((word: any) => {
         console.log(word);
@@ -117,7 +118,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
     
     
 
-    this.http.post("http://localhost:8080/dictionary/updateLevel", httpParams, httpOptions).subscribe(request =>{
+    this.http.post(this.epService.getServerUrl() + "/dictionary/updateLevel", httpParams, httpOptions).subscribe(request =>{
       console.log("Updated");
     });   
   }

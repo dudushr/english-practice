@@ -69,7 +69,7 @@ export class WordEditorComponent implements OnInit {
     .append("uid", this.loginService.getUser());
 
     
-    this.http.post("http://localhost:8080/dictionary/update", httpParams, httpOptions).subscribe(request =>{
+    this.http.post(this.epService.getServerUrl() + "/dictionary/update", httpParams, httpOptions).subscribe(request =>{
       this.dialogRef.close();
     });
   }

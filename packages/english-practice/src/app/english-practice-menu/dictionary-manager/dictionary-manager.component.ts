@@ -94,7 +94,7 @@ export class DictionaryManagerComponent  implements OnInit {
     .append("uid", this.loginService.getUser());
     
 
-    this.http.post("http://localhost:8080/dictionary/add", httpParams, httpOptions).subscribe(request =>{
+    this.http.post(this.epService.getServerUrl() + "/dictionary/add", httpParams, httpOptions).subscribe(request =>{
       this.ngOnInit();
       this.table.renderRows();
     });

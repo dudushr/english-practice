@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'myorg-hebrew-text-field',
@@ -10,6 +10,8 @@ export class HebrewTextFieldComponent implements OnInit {
   @Output() keyUp = new EventEmitter<string>();
   @Output() enterPressed = new EventEmitter<string>();
   @Output() Blur = new EventEmitter<string>();
+
+  @ViewChild('txtHebrew') txtHebrew!: ElementRef;
   
 
   ngOnInit(): void {
@@ -73,5 +75,8 @@ export class HebrewTextFieldComponent implements OnInit {
   }
 
 
- 
+ public focus(): void{
+  this.txtHebrew.nativeElement.focus();
+ }
+
 }

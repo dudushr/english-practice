@@ -1,12 +1,12 @@
 <div style="height:100%">
     <div style="height:40%;display: inline-table">&nbsp;</div>
-    <div class="title">ההכתבה הסתיימה</div>
+    <div [class]="getClassName('title')" >ההכתבה הסתיימה</div>
 
     <div>&nbsp;</div>
     <div>&nbsp;</div>
 
     <div>
-        <button class="title" (click)="startDictation()">התחל הכתבה חדשה</button>
+        <button [class]="getClassName('title')" (click)="startDictation()">התחל הכתבה חדשה</button>
     </div>
 
     <div>&nbsp;</div>

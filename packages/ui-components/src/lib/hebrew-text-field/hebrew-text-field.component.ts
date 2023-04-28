@@ -76,6 +76,7 @@ export class HebrewTextFieldComponent implements OnInit {
 
 
  public focus(): void{
+  console.log()
   this.txtHebrew.nativeElement.focus();
  }
 

@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginManagerService } from './login-manager.service';
 import { EpHttpServiceService } from './ep-http-service.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,10 @@ export class EnglishConfigurationService {
   lowLevelWords = 10;
   listener: Array<ConfigChanged> = [];
 
-  constructor(private http: HttpClient, private loginService: LoginManagerService, private epService: EpHttpServiceService) {
+  constructor(private http: HttpClient, 
+              private loginService: LoginManagerService, 
+              private epService: EpHttpServiceService,
+              private deviceDetectorService: DeviceDetectorService) {
     this.refresh();
    }
 
@@ -48,6 +53,23 @@ export class EnglishConfigurationService {
 
   public addConfigChangedListener(obj: ConfigChanged){
     this.listener.push(obj);
+  }
+
+
+  public getDevice(): string{
+    const isMobile = this.deviceDetectorService.isMobile();
+    const isTablet = this.deviceDetectorService.isTablet();
+    const isDesktop = this.deviceDetectorService.isDesktop();
+
+    if (isMobile) {
+        return"mobile";
+    } else if (isTablet) {
+        return "desktop";
+    } else if (isDesktop) {
+        return "desktop";
+    }
+
+    return "desktop";
   }
 
 }

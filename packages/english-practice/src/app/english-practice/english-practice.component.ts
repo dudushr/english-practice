@@ -85,6 +85,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
             this.dictation.updateStatus(DictationWordComponent.WRONG_ANSWER);
             this.dictation.updateOriginAnswer(this.currentAnswernWord.hebrewWord[0]);
           }
+          this.txtAnswer?.focus(); 
         }
     }
   }

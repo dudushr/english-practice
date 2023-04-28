@@ -2,7 +2,7 @@
 <mat-tab-group animationDuration="0ms"  #myTabs (selectedIndexChange)="myTabSelectedIndexChange($event)">
     <mat-tab label="אימון" >
         <ng-template mat-tab-label> 
-            <span class="menu-button {{myTabs.selectedIndex === 0 ? 'selectedButton' : 'unselectedButton'}}" > 
+            <span class="{{ getClassName('menu-button') }} {{myTabs.selectedIndex === 0 ? 'selectedButton' : 'unselectedButton'}}" > 
                 אימון
             </span>
         </ng-template>
@@ -14,7 +14,7 @@
 
     <mat-tab label="Second" >
         <ng-template mat-tab-label> 
-            <span class="menu-button {{myTabs.selectedIndex === 1 ? 'selectedButton' : 'unselectedButton'}}" > 
+            <span class="{{ getClassName('menu-button') }} {{myTabs.selectedIndex === 1 ? 'selectedButton' : 'unselectedButton'}}" > 
                 אוצר מילים
             </span>
         </ng-template>
@@ -26,7 +26,7 @@
 
     <mat-tab label="Third">
         <ng-template mat-tab-label> 
-            <span class="menu-button {{myTabs.selectedIndex === 2 ? 'selectedButton' : 'unselectedButton'}}" > 
+            <span class="{{ getClassName('menu-button') }} {{myTabs.selectedIndex === 2 ? 'selectedButton' : 'unselectedButton'}}" > 
                 סטטיסטיקה
             </span>
         </ng-template>
@@ -34,9 +34,9 @@
     </mat-tab>
 
 
-    <mat-tab label="Third">
+    <mat-tab label="Fourth">
         <ng-template mat-tab-label> 
-            <span class="menu-button {{myTabs.selectedIndex === 2 ? 'selectedButton' : 'unselectedButton'}}" > 
+            <span class="{{ getClassName('menu-button') }} {{myTabs.selectedIndex === 3 ? 'selectedButton' : 'unselectedButton'}}" > 
                 הגדרות
             </span>
         </ng-template>

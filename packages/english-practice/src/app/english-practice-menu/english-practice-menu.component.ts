@@ -10,13 +10,15 @@ import { ConfigChanged, EnglishConfigurationService } from '../services/english-
 })
 export class EnglishPracticeMenuComponent implements OnInit {
   @ViewChild(DictionaryManagerComponent) dictionaryManager?: DictionaryManagerComponent;
-  
+  device = "desktop";
   
   
   constructor(private loginService: LoginManagerService, private configurationService: EnglishConfigurationService) {}
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.device = this.configurationService.getDevice();
+  }
 
   myTabSelectedIndexChange(index: number) {
     if(index === 1){
@@ -25,6 +27,11 @@ export class EnglishPracticeMenuComponent implements OnInit {
       this.configurationService.refresh();
     }
   } 
+
+
+  getClassName(className: string){
+    return this.device + '_' + className;
+  }
 }
 
 

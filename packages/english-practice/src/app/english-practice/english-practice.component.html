@@ -20,7 +20,7 @@
             <div class="englishWord">{{currentQuestionWord.englishWord}}:</div>
             <div style="text-align: left;">&nbsp;&nbsp;</div>
             <div style="text-align: left;">
-                <myorg-hebrew-text-field [value]="currentAnswernWord.hebrewWord[0]" (keyUp)="currentAnswernWord.hebrewWord=[$event]" (enterPressed)="checkAnswer()"></myorg-hebrew-text-field>
+                <myorg-hebrew-text-field #txtAnswer [value]="currentAnswernWord.hebrewWord[0]" (keyUp)="currentAnswernWord.hebrewWord=[$event]" (enterPressed)="checkAnswer()"></myorg-hebrew-text-field>
             </div>
 
             <div style="text-align: left;">&nbsp;&nbsp;</div>
@@ -32,7 +32,7 @@
             <div style="text-align: left;">&nbsp;&nbsp;</div>
 
             <div style="text-align: left;" [hidden]="status === 0">
-                <button ng-show="status != 0" (click)="checkAnswer()" >לשאלה הבאה</button>
+                <button ng-show="status != 0" (click)="checkAnswer();" >לשאלה הבאה</button>
             </div>
         </div>
     </div>

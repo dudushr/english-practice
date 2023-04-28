@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DictationWordComponent } from '../dictation/dictation-word/dictation-word.component';
 import { DictationComponent } from '../dictation/dictation.component';
 import { DictionaryComponent } from '../dictionary/dictionary/dictionary.component';
@@ -7,6 +7,7 @@ import { EnglishWordComponent } from '../dictionary/english-word/english-word.co
 import { LoginManagerService } from '../services/login-manager.service';
 import { ConfigChanged, EnglishConfigurationService } from '../services/english-configuration.service';
 import { EpHttpServiceService } from '../services/ep-http-service.service';
+import { HebrewTextFieldComponent } from 'packages/ui-components/src/lib/hebrew-text-field/hebrew-text-field.component';
 
 @Component({
   selector: 'myorg-english-practice',
@@ -27,6 +28,8 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
   _DICTATION_ENDED = EnglishPracticeComponent.DICTATION_ENDED;
 
   NUM_OF_WORDS_IN_DICTATION = 4;
+
+  @ViewChild(HebrewTextFieldComponent) txtAnswer?: HebrewTextFieldComponent;
 
   dictionary: DictionaryComponent = new DictionaryComponent();
   dictation: DictationComponent = new DictationComponent();
@@ -92,6 +95,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
       this.currentAnswernWord = new EnglishWordComponent();
       this.status = EnglishPracticeComponent.WAITING_FOR_QUESTION;
       this.message = "";
+      this.txtAnswer?.focus(); 
     }else{
       this.message = "סיימת את ההכתבה"
       this.status = EnglishPracticeComponent.DICTATION_ENDED;
@@ -155,3 +159,5 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
     this.NUM_OF_WORDS_IN_DICTATION = this.configurationService.getNumOfWordsInDictation();
   }
 }
+
+

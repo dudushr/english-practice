@@ -1,4 +1,4 @@
 export const environment = {
-  beta: true,
+  production: true,
   serverPort: 8083,
 };

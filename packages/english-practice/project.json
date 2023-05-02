@@ -46,6 +46,29 @@
           ],
           "outputHashing": "all"
         },
+
+        "beta": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "15mb",
+              "maximumError": "15mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "25mb",
+              "maximumError": "15mb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "packages/english-practice/src/environments/environment.ts",
+              "with": "packages/english-practice/src/environments/environment.beta.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+
         "development": {
           "buildOptimizer": false,
           "optimization": false,

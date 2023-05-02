@@ -16,7 +16,15 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/packages/english-practice/index.html'));
 });
 
-const port = process.env.PORT || 4200;
+console.log(__dirname)
+portByEnv = 4200;
+if(__dirname.indexOf("prod") != -1){
+  portByEnv = 4200
+}else if(__dirname.indexOf("beta") != -1){
+  portByEnv = 4210
+}
+
+const port = process.env.PORT || portByEnv;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });

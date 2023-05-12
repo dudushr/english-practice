@@ -13,6 +13,7 @@ export class EnglishWordComponent implements OnInit {
   hebrewWord: Array<string> = new Array<string>();
   level = 0;
   lastDictationDate = new Date();
+  clueFileName = "";
 
 
 
@@ -41,6 +42,10 @@ export class EnglishWordComponent implements OnInit {
 
     if(word.lastDictationDate){
       this.lastDictationDate = word.lastDictationDate;
+    }
+
+    if(word.clueFileName){
+      this.clueFileName = word.clueFileName;
     }
   }
 

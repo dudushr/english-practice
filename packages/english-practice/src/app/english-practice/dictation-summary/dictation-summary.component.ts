@@ -31,7 +31,6 @@ export class DictationSummaryComponent implements OnInit {
   }
 
   getClassName(className: string){
-    console.log(this.device + '_' + className);
     return this.device + '_' + className;
   }
 }

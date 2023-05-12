@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { UiComponentsModule } from '@myorg/ui-components';
 import { WordEditorComponent } from './word-editor.component';
-
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 
@@ -19,6 +19,7 @@ import { WordEditorComponent } from './word-editor.component';
     MatIconModule,
     MatButtonModule, 
     UiComponentsModule,
+    FileUploadModule,
     
   ],
   exports: [WordEditorComponent]

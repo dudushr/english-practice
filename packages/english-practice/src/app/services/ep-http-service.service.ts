@@ -11,9 +11,7 @@ export class EpHttpServiceService {
 
   public getServerUrl(): string{
     const currentUrl = window.location.href;
-    const port = environment.serverPort;
-
-    console.log('env = ' + environment.name);
+    const port = this.getPort();
 
     if(currentUrl.indexOf("localhost") != -1){
       return "http://localhost:" + port;
@@ -21,5 +19,14 @@ export class EpHttpServiceService {
       return "http://141.136.36.155:" + port;
     }
 
+  }
+
+  getPort(): number{
+    const currentUrl = window.location.href;
+    if(currentUrl.indexOf("4210") != -1){
+      return 8083;
+    }else{
+      return 8080;
+    }
   }
 }

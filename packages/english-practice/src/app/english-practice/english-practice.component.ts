@@ -38,8 +38,11 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
   currentAnswernWord: EnglishWordComponent = new EnglishWordComponent();
   message = "";
   status = EnglishPracticeComponent.DICTATION_NOT_STARTED;
+  clueImageData: any = null;
 
-  constructor(private http: HttpClient, private loginService: LoginManagerService, private configurationService: EnglishConfigurationService, private epService: EpHttpServiceService) {
+  constructor(private http: HttpClient, private loginService: LoginManagerService, 
+        private configurationService: EnglishConfigurationService, 
+        private epService: EpHttpServiceService) {
     this.configurationService.addConfigChangedListener(this);
     this.NUM_OF_WORDS_IN_DICTATION = configurationService.getNumOfWordsInDictation();
   }
@@ -91,6 +94,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
   }
 
   nextQuestion(){
+    this.clueImageData = null;
     if(this.dictation.hasNext()){
       this.currentQuestionWord = this.dictation.getNext();
       this.currentAnswernWord = new EnglishWordComponent();
@@ -158,6 +162,23 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
 
   configChangedAction(): void {
     this.NUM_OF_WORDS_IN_DICTATION = this.configurationService.getNumOfWordsInDictation();
+  }
+
+  getClueImage() {
+    const uid = this.loginService.getUser();
+    const serviceUrl = this.epService.getServerUrl() + "/clue/" + uid + "/" + this.currentQuestionWord.englishWord;
+    this.http.get(serviceUrl, { responseType: 'blob' })
+      .subscribe(response => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.clueImageData = reader.result;
+        };
+        reader.readAsDataURL(response);
+      });
+  }
+
+  getClassName(className: string){
+    return this.configurationService.getClassName(className);
   }
 }
 

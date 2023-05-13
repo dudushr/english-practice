@@ -1,10 +1,11 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { EnglishWordComponent } from '../../../dictionary/english-word/english-word.component';
 import { LoginManagerService } from '../../../services/login-manager.service';
 import { EpHttpServiceService } from '../../../services/ep-http-service.service';
 import { FileUploader } from 'ng2-file-upload';
+import { catchError, throwError } from 'rxjs';
 
 
 
@@ -29,15 +30,24 @@ export class WordEditorComponent implements OnInit {
       this.word.level = wordFromServer.level;
       this.word.lastDictationDate = wordFromServer.lastDictationDate;
       this.word.clueFileName = wordFromServer.clueFileName;
+
       if(this.word.level === undefined){
         this.word.level = 0;
+      }
+
+      if(this.word.clueFileName === undefined){
+        this.word.clueFileName = "";
       }
 
       this.uploader = new FileUploader({url: 'http://localhost:8080/upload/' + uid + '/' + this.word.englishWord});
       this.uploader.onAfterAddingFile = (file) => {
         console.log('File selected:', file);
-        this.uploader.uploadAll();
-      };  
+        this.uploader.uploadAll();        
+      }; 
+      this.uploader.onCompleteAll = () => {
+        this.reloadClueFileName();
+      };
+      
     });
 
   }
@@ -94,5 +104,41 @@ export class WordEditorComponent implements OnInit {
   }
 
 
+  removeClue(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'my-auth-token'
+      })
+    };
+
+    const httpParams = new HttpParams()
+    .append("wordToRemove", this.word.englishWord)
+    .append("uid", this.loginService.getUser());
+
+    
+    this.http.post(this.epService.getServerUrl() + "/remove/clue/" + this.loginService.getUser() + "/" + this.word.englishWord, httpParams, httpOptions)
+    .pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log(error);
+        return throwError('An error occurred');
+      }))
+    .subscribe(request =>{
+      console.log("removed");
+      this.reloadClueFileName();
+    });
+  }
+
+  reloadClueFileName(){
+    const uid = this.loginService.getUser();
+    this.http.get(this.epService.getServerUrl() + "/dictionary/" + uid + "/getWord/" + this.data.word).subscribe(request =>{
+      const wordFromServer = (request as any);     
+      this.word.clueFileName = wordFromServer.clueFileName;
+
+      if(this.word.clueFileName === undefined){
+        this.word.clueFileName = "";
+      }
+    })
+  }
   
 }

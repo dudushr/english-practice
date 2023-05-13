@@ -31,8 +31,23 @@
             <div style="text-align: left;">&nbsp;&nbsp;</div>
             <div style="text-align: left;">&nbsp;&nbsp;</div>
 
-            <div style="text-align: left;" [hidden]="status === 0">
-                <button ng-show="status != 0" (click)="checkAnswer();" >לשאלה הבאה</button>
+            <div style="text-align: left;">
+                <div class="nowrap" style="text-align: left;" [hidden]="status === 0"  >
+                    <button ng-show="status != 0" (click)="checkAnswer();" >לשאלה הבאה</button>
+                </div>
+
+                <div class="nowrap" style="text-align: left;">&nbsp;&nbsp;</div>
+                <div class="nowrap" style="text-align: left;">&nbsp;&nbsp;</div>
+
+                <div class="nowrap" style="text-align: left;" *ngIf="currentQuestionWord.clueFileName.length > 0">
+                    <button (click)="getClueImage()" >רמז</button>
+                </div>
+            </div>
+
+            <div>&nbsp;</div>
+
+            <div style="text-align: left;" [hidden]="clueImageData === null">
+                <img [class]="getClassName('clueDimension')" [src]="clueImageData">
             </div>
         </div>
     </div>

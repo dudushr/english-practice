@@ -51,6 +51,9 @@
             </div>
             <div class="nowrap div10">&nbsp;</div>
             <div class="nowrap">{{ getWordClueFileName() }}</div>
+            <div class="nowrap" *ngIf="word.clueFileName.length !== 0">
+                <i class="material-icons remove_circle liButton" (click)="removeClue()" ></i>            
+            </div>
         </div>
     </div>
 </div>

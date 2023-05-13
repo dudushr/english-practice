@@ -72,6 +72,11 @@ export class EnglishConfigurationService {
     return "desktop";
   }
 
+  public getClassName(className: string){
+    const device = this.getDevice();
+    return device + '_' + className;
+  }
+
 }
 
 

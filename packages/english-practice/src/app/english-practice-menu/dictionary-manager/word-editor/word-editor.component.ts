@@ -39,7 +39,7 @@ export class WordEditorComponent implements OnInit {
         this.word.clueFileName = "";
       }
 
-      this.uploader = new FileUploader({url: 'http://localhost:8080/upload/' + uid + '/' + this.word.englishWord});
+      this.uploader = new FileUploader({url: this.epService.getServerUrl() + '/upload/' + uid + '/' + this.word.englishWord});
       this.uploader.onAfterAddingFile = (file) => {
         console.log('File selected:', file);
         this.uploader.uploadAll();        

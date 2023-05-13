@@ -17,7 +17,7 @@ import { catchError, throwError } from 'rxjs';
 })
 export class WordEditorComponent implements OnInit {
   word: EnglishWordComponent = new EnglishWordComponent();
-  uploader: FileUploader = new FileUploader({url: 'http://localhost:8080/upload'});
+  uploader: FileUploader = new FileUploader({url: this.epService.getServerUrl() + '/upload'});
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<WordEditorComponent>, private http: HttpClient, private loginService: LoginManagerService, private epService: EpHttpServiceService) {

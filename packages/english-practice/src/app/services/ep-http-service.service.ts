@@ -20,4 +20,15 @@ export class EpHttpServiceService {
     }
 
   }
+
+  getPort(){
+    const currentUrl = window.location.href;
+    if(currentUrl.indexOf("beta") != -1){
+      return "8083";
+    }else if(currentUrl.indexOf("prod") != -1){
+      return "8080";
+    }else{
+      return "8080";
+    }
+  }
 }

@@ -13,6 +13,8 @@ export class EpHttpServiceService {
     const currentUrl = window.location.href;
     const port = environment.serverPort;
 
+    console.log('env = ' + environment.name);
+
     if(currentUrl.indexOf("localhost") != -1){
       return "http://localhost:" + port;
     }else{
@@ -20,5 +22,4 @@ export class EpHttpServiceService {
     }
 
   }
-  
 }

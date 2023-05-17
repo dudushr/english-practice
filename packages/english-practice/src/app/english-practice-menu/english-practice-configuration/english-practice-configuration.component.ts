@@ -15,6 +15,7 @@ export class EnglishPracticeConfigurationComponent implements OnInit, ConfigChan
   highLevelWords = "";
   mediumLevelWords = "";
   lowLevelWords = "";
+  showClueUntilLevel = "";
 
   constructor(private http: HttpClient, private loginService: LoginManagerService, private configurationService: EnglishConfigurationService, private epService: EpHttpServiceService) {    
     this.configurationService.addConfigChangedListener(this);
@@ -39,6 +40,7 @@ export class EnglishPracticeConfigurationComponent implements OnInit, ConfigChan
     .append("highLevelWords", JSON.stringify(this.highLevelWords))
     .append("mediumLevelWords", JSON.stringify(this.mediumLevelWords))
     .append("lowLevelWords", JSON.stringify(this.lowLevelWords))
+    .append("showClueUntilLevel", JSON.stringify(this.showClueUntilLevel))
     .append("uid", this.loginService.getUser());
 
     this.http.post(this.epService.getServerUrl() + "/english/config/save", httpParams, httpOptions).subscribe(request =>{
@@ -51,5 +53,6 @@ export class EnglishPracticeConfigurationComponent implements OnInit, ConfigChan
     this.highLevelWords = "" + this.configurationService.getHighLevelWords();
     this.mediumLevelWords = "" + this.configurationService.getMediumeLevelWords();
     this.lowLevelWords = "" + this.configurationService.getLowLevelWords();
+    this.showClueUntilLevel = "" + this.configurationService.getShowClueUntilLevel();
   }
 }

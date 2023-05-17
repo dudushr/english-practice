@@ -13,6 +13,7 @@ export class EnglishConfigurationService {
   highLevelWords = 30;
   mediumeLevelWords = 20;
   lowLevelWords = 10;
+  showClueUntilLevel = 10;
   listener: Array<ConfigChanged> = [];
 
   constructor(private http: HttpClient, 
@@ -38,12 +39,17 @@ export class EnglishConfigurationService {
     return this.lowLevelWords;
   }
 
+  public getShowClueUntilLevel(): number{
+    return this.showClueUntilLevel;
+  }
+
   public refresh(){
     this.http.get(this.epService.getServerUrl() + "/english/config/get/" + this.loginService.getUser()).subscribe(request =>{
       this.numOfWordsInDictation = (request as any).numOfWordsInDictation;
       this.highLevelWords = (request as any).highLevelWords;
       this.mediumeLevelWords = (request as any).mediumLevelWords;
       this.lowLevelWords = (request as any).lowLevelWords;
+      this.showClueUntilLevel = (request as any).showClueUntilLevel;
 
       for(let i=0; i<this.listener.length; i++){
         this.listener[i].configChangedAction();

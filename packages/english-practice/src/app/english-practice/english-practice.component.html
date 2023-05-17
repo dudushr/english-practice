@@ -39,7 +39,7 @@
                 <div class="nowrap" style="text-align: left;">&nbsp;&nbsp;</div>
                 <div class="nowrap" style="text-align: left;">&nbsp;&nbsp;</div>
 
-                <div class="nowrap" style="text-align: left;" *ngIf="currentQuestionWord.clueFileName.length > 0">
+                <div class="nowrap" style="text-align: left;" *ngIf="showClue()">
                     <button (click)="getClueImage()" >רמז</button>
                 </div>
             </div>

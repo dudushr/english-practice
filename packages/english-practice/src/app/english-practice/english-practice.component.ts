@@ -186,6 +186,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
     const showClueUntilLevel = this.configurationService.getShowClueUntilLevel();
     const isShowClue = (this.currentQuestionWord.level <= showClueUntilLevel);
     console.log("hasClue = " + hasClue + "    isShowClue = " + isShowClue)
+    console.log("showClueUntilLevel = " + showClueUntilLevel + "    currentQuestionWord = " + this.currentQuestionWord.level)
     return hasClue && isShowClue;
   }
 }

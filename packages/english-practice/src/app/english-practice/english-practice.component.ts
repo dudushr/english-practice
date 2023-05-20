@@ -44,8 +44,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
         private configurationService: EnglishConfigurationService, 
         private epService: EpHttpServiceService) {
     this.configurationService.addConfigChangedListener(this);
-    this.NUM_OF_WORDS_IN_DICTATION = configurationService.getNumOfWordsInDictation();
-    this.configurationService.refresh();
+    this.NUM_OF_WORDS_IN_DICTATION = configurationService.getNumOfWordsInDictation();    
   }
   
 
@@ -64,6 +63,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
       this.dictation.add(this.dictionary.createDictation(this.NUM_OF_WORDS_IN_DICTATION));
 
       this.currentQuestionWord = this.dictionary.getDictionary()[this.currentQuestionWordIndex];
+      this.configurationService.refresh();
     })
   }
 

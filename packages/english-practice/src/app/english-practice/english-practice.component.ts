@@ -45,6 +45,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
         private epService: EpHttpServiceService) {
     this.configurationService.addConfigChangedListener(this);
     this.NUM_OF_WORDS_IN_DICTATION = configurationService.getNumOfWordsInDictation();
+    this.configurationService.refresh();
   }
   
 
@@ -183,13 +184,8 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
 
   showClue(): boolean{
     const hasClue = (this.currentQuestionWord.clueFileName.length > 0);
-    const showClueUntilLevel = +this.configurationService.getShowClueUntilLevel();
-    const isShowClue = (this.currentQuestionWord.level <= showClueUntilLevel);
-
-    if(!isShowClue){
-      console.log("hasClue = " + hasClue + "    isShowClue = " + isShowClue)
-      console.log("showClueUntilLevel = " + showClueUntilLevel + "    level = " + this.currentQuestionWord.level)
-    }
+    const showClueUntilLevel = this.configurationService.getShowClueUntilLevel();
+    const isShowClue = (this.currentQuestionWord.level <= showClueUntilLevel)
 
     return hasClue && isShowClue;
   }

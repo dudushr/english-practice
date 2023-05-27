@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DictationWordComponent } from '../dictation/dictation-word/dictation-word.component';
 import { DictationComponent } from '../dictation/dictation.component';
@@ -39,6 +39,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
   message = "";
   status = EnglishPracticeComponent.DICTATION_NOT_STARTED;
   clueImageData: any = null;
+  audioExitance:  Map<string, boolean> = new Map();
 
   constructor(private http: HttpClient, private loginService: LoginManagerService, 
         private configurationService: EnglishConfigurationService, 
@@ -64,6 +65,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
 
       this.currentQuestionWord = this.dictionary.getDictionary()[this.currentQuestionWordIndex];
       this.configurationService.refresh();
+      this.updateHasAudioMap(this.currentQuestionWord.englishWord);   
     })
   }
 
@@ -101,6 +103,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
       this.currentAnswernWord = new EnglishWordComponent();
       this.status = EnglishPracticeComponent.WAITING_FOR_QUESTION;
       this.message = "";
+      this.updateHasAudioMap(this.currentQuestionWord.englishWord);
       this.txtAnswer?.focus(); 
     }else{
       this.message = "סיימת את ההכתבה"
@@ -188,6 +191,32 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
     const isShowClue = (this.currentQuestionWord.level <= showClueUntilLevel)
 
     return hasClue && isShowClue;
+  }
+
+  playAudio(englishWord: string) {
+    const audioUrl = this.epService.getServerUrl() + "/audio/" + englishWord;
+
+    const audio = new Audio(audioUrl);
+    audio.play();
+  }
+
+  updateHasAudioMap(englishWord: string): void{
+    if(this.audioExitance.get(englishWord) !== null){     
+      const audioUrl = this.epService.getServerUrl() + "/audio/" + englishWord;
+      this.http.get(audioUrl,  { responseType: 'blob' }).subscribe(
+        () => {
+          this.audioExitance.set(englishWord, true);
+        },
+        (error: HttpErrorResponse) => {
+          this.audioExitance.set(englishWord, false);
+        }
+      );
+    }
+  }
+
+  hasAudio(englishWord: string): boolean{
+    const hasAudio = this.audioExitance.get(englishWord);
+    return hasAudio === true;
   }
 }
 

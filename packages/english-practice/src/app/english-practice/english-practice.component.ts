@@ -187,7 +187,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
 
   showClue(): boolean{
     const hasClue = (this.currentQuestionWord.clueFileName.length > 0);
-    const showClueUntilLevel = this.configurationService.getShowClueUntilLevel();
+    const showClueUntilLevel = parseInt(""+this.configurationService.getShowClueUntilLevel());
     const isShowClue = (this.currentQuestionWord.level <= showClueUntilLevel)
 
     return hasClue && isShowClue;

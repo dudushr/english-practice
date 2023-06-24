@@ -39,13 +39,32 @@
   }
 
   .selectedButton{
-    background-color: blue ;
+   // background-color: #007bff;
+   background-color: #0828a8e5;
+    color: white;
   }
 
   .unselectedButton{
-    background-color: aqua;
+    //background-color: aqua;
+    
   }
 
   .red{
     background-color: red;
+  }
+
+
+  ::ng-deep .mat-mdc-tab.mdc-tab {
+   // background-color: #0828a8e5;
+    background-color: #007bff;
+    //border-radius: 4px;
+    //padding: 10px;
+  }
+
+
+  
+
+  .mat-tab-label.active {
+    background-color: #007bff;
+    color: white;
   }

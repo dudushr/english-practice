@@ -12,6 +12,7 @@ export class EnglishWordComponent implements OnInit {
   englishWord = "";
   hebrewWord: Array<string> = new Array<string>();
   level = 0;
+  levelWrite = 0;
   lastDictationDate = new Date();
   clueFileName = "";
 
@@ -47,6 +48,10 @@ export class EnglishWordComponent implements OnInit {
     if(word.clueFileName){
       this.clueFileName = word.clueFileName;
     }
+
+    if(word.levelWrite){
+      this.levelWrite = word.levelWrite;
+    }
   }
 
   public updateLevel(status: number): void{
@@ -60,6 +65,21 @@ export class EnglishWordComponent implements OnInit {
       this.level = this.level - 2;
       if(this.level < 0){
         this.level = 0;
+      }
+    }
+  }
+
+  public updateLevelWrite(status: number): void{
+    if(status === EnglishWordComponent.SUCCESS){
+      if(this.levelWrite < 6){
+        this.levelWrite += 1
+      }else{
+        this.levelWrite += 4
+      }
+    }else if(status === EnglishWordComponent.WRONG){
+      this.levelWrite = this.levelWrite - 2;
+      if(this.levelWrite < 0){
+        this.levelWrite = 0;
       }
     }
   }

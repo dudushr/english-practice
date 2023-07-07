@@ -8,6 +8,8 @@ import { LoginManagerService } from '../services/login-manager.service';
 import { ConfigChanged, EnglishConfigurationService } from '../services/english-configuration.service';
 import { EpHttpServiceService } from '../services/ep-http-service.service';
 import { HebrewTextFieldComponent } from 'packages/ui-components/src/lib/hebrew-text-field/hebrew-text-field.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EnglishPuzzleComponent } from './english-puzzle/english-puzzle.component';
 
 @Component({
   selector: 'myorg-english-practice',
@@ -42,6 +44,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
   audioExitance:  Map<string, boolean> = new Map();
 
   constructor(private http: HttpClient, private loginService: LoginManagerService, 
+        public dialog: MatDialog, 
         private configurationService: EnglishConfigurationService, 
         private epService: EpHttpServiceService) {
     this.configurationService.addConfigChangedListener(this);
@@ -66,6 +69,7 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
       this.currentQuestionWord = this.dictionary.getDictionary()[this.currentQuestionWordIndex];
       this.configurationService.refresh();
       this.updateHasAudioMap(this.currentQuestionWord.englishWord);   
+      //this.openPuzzle();
     })
   }
 
@@ -217,6 +221,21 @@ export class EnglishPracticeComponent implements OnInit, ConfigChanged {
   hasAudio(englishWord: string): boolean{
     const hasAudio = this.audioExitance.get(englishWord);
     return hasAudio === true;
+  }
+
+
+  openPuzzle(){
+    const dialogConfig = new MatDialogConfig();
+    
+    dialogConfig.width = '700px';
+    dialogConfig.height = '400px';
+    dialogConfig.data = {};
+
+    this.dialog.open(EnglishPuzzleComponent, dialogConfig);
+
+    this.dialog.afterAllClosed.subscribe(result => {
+      this.ngOnInit();
+    });
   }
 }
 

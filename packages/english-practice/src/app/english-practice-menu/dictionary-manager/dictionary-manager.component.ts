@@ -24,7 +24,7 @@ export class DictionaryManagerComponent  implements OnInit {
   newWord: EnglishWordComponent = new EnglishWordComponent();
  // dataSource : EnglishWordComponent[] = [ ];
   dataSource = new MatTableDataSource<EnglishWordComponent>();
-  displayedColumns: string[] = ['English', 'Hebrew', 'Level', 'Date', 'Edit', 'Remove'];
+  displayedColumns: string[] = ['English', 'Hebrew', 'Level', 'LevelWrite', 'Date', 'Edit', 'Remove'];
   _jsonURL = "dictionary.json"
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;  

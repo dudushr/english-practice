@@ -85,6 +85,10 @@ export class WordEditorComponent implements OnInit {
     this.word.level = $event.srcElement.value;
   }
 
+  updateLevelWrite($event: any){
+    this.word.levelWrite = $event.srcElement.value;
+  }
+
   saveWord(){
     const httpOptions = {
       headers: new HttpHeaders({

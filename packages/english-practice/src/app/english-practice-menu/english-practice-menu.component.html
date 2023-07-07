@@ -1,7 +1,7 @@
 
 <mat-tab-group animationDuration="0ms"  #myTabs (selectedIndexChange)="myTabSelectedIndexChange($event)">
-    <mat-tab label="אימון" >
-        <ng-template mat-tab-label> 
+    <mat-tab label="אימון"  >
+        <ng-template mat-tab-label > 
             <span class="{{ getClassName('menu-button') }} {{myTabs.selectedIndex === 0 ? 'selectedButton' : 'unselectedButton'}}" > 
                 אימון
             </span>

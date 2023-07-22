@@ -1,0 +1,32 @@
+@use "@material/icon-button";
+@use "material-design-icons-iconfont";
+
+.englishWord{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    text-align: center;
+    direction: rtl;
+}
+
+.correctAnswer{
+    color: green;
+}
+
+.wrongAnswer{
+    color: red;
+}
+
+.nowrap{
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.desktop_clueDimension{
+    width: 300px;
+    height: 300px;
+}
+
+.mobile_clueDimension{
+    width: 80px;
+    height: 80px;
+}

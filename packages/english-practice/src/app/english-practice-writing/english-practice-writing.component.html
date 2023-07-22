@@ -1,0 +1,46 @@
+<div style="height: 500px; width:100%; text-align: center;" [hidden]="showDictation()">
+    <myorg-dictation-summary 
+        [dictationSummary]="dictation" 
+        [showSummary]="showSummary()"
+        (onStartNewDictation)="startNewDictation()" >
+    </myorg-dictation-summary>    
+</div>
+
+
+<div [hidden]="!showDictation()" style="width:98%; text-align: center;" >
+    <!--div style="text-align: center; width:70%; font-weight: bold; font-size: x-large;" >English Practice</div-->    
+    <div style="height:60%;display: inline-table">
+        
+    </div>
+    <div style="text-align: center; width:40%; display: inline-table;" >
+        <div class="englishWord">
+            <i *ngIf="hasAudio(currentQuestionWord.englishWord)" (click)="playAudio(currentQuestionWord.englishWord)" class="material-icons spatial_audio_off"></i>
+            &nbsp;
+            {{currentQuestionWord.hebrewWord}}:
+        </div>
+        <div style="text-align: left;">&nbsp;&nbsp;</div>
+        <div style="text-align: center;">           
+            <input matInput  #txtAnswer [value]="currentAnswernWord.englishWord" (keyup)="currentAnswernWord.englishWord=txtAnswer.value"  (keyup.enter)="checkAnswer()">           
+        </div>
+
+        <div style="text-align: left;">&nbsp;&nbsp;</div>
+        <div style="text-align: left;">&nbsp;&nbsp;</div>
+
+        <div style="direction:rtl; text-align: center;" class="{{(status === 1) ? 'correctAnswer' : 'wrongAnswer'}}">{{message}}</div>
+
+        <div style="text-align: left;">&nbsp;&nbsp;</div>
+        <div style="text-align: left;">&nbsp;&nbsp;</div>
+
+        <div style="text-align: center;">
+            <div class="nowrap" style="text-align: center;" [hidden]="status === 0"  >
+                <button ng-show="status != 0" (click)="checkAnswer();" >לשאלה הבאה</button>
+            </div>
+
+            <div class="nowrap" style="text-align: left;">&nbsp;&nbsp;</div>
+            <div class="nowrap" style="text-align: left;">&nbsp;&nbsp;</div>
+
+        </div>
+
+       
+    </div>
+</div>

@@ -46,4 +46,18 @@ export class DictionaryComponent implements OnInit {
 
     return dictation;
   }
+
+
+  public createWrittingDictation(numOfWords: number): Array<EnglishWordComponent>{
+    const dictation = new Array<EnglishWordComponent>();
+    const wordsForWrittingDictation = this.dictionary.filter((word) => {
+      return word.includeWriteTest;
+    });
+
+    for(let i=0; i<Math.min(numOfWords, wordsForWrittingDictation.length); i++){
+      dictation.push(wordsForWrittingDictation[i]);
+    }
+
+    return dictation;
+  }
 }

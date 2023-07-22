@@ -17,6 +17,8 @@ import { EnglishPracticeConfigurationComponent } from './english-practice-config
 import { EnglishPracticeConfigurationModule } from './english-practice-configuration/english-practice-configuration.module';
 import { DictionaryStatisticsModule } from './dictionary-manager/dictionary-statistics/dictionary-statistics.module';
 import { FormsModule } from '@angular/forms';
+import { EnglishPracticeSelectorModule } from '../english-practice-selector/english-practice-selector.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     MatIconModule, 
+    EnglishPracticeSelectorModule,
+    MatCheckboxModule
   ],
 
   exports: [EnglishPracticeMenuComponent],

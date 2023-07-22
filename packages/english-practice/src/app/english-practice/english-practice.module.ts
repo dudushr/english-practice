@@ -5,14 +5,14 @@ import { UiComponentsModule } from '@myorg/ui-components';
 import { DictationSummaryComponent } from './dictation-summary/dictation-summary.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { EnglishPuzzleComponent } from './english-puzzle/english-puzzle.component';
+import { DictationSummaryModule } from './dictation-summary/dictation-summary.module';
 
 @NgModule({
   declarations: [
-    EnglishPracticeComponent,
-    DictationSummaryComponent,
+    EnglishPracticeComponent,    
     EnglishPuzzleComponent,
   ],
-  imports: [CommonModule, UiComponentsModule, NgxAudioPlayerModule],
+  imports: [CommonModule, UiComponentsModule, NgxAudioPlayerModule,DictationSummaryModule],
   exports: [EnglishPracticeComponent],
 })
 export class EnglishPracticeModule {}

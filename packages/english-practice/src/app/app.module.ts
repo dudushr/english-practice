@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EnglishPracticeConfigurationModule } from './english-practice-menu/english-practice-configuration/english-practice-configuration.module';
 import { DictionaryStatisticsModule } from './english-practice-menu/dictionary-manager/dictionary-statistics/dictionary-statistics.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,

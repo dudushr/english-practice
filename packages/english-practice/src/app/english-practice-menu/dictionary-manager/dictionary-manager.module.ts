@@ -14,6 +14,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { DictionaryStatisticsModule } from './dictionary-statistics/dictionary-statistics.module';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     FormsModule,
     MatIconModule, 
+    MatCheckboxModule,
+    BrowserAnimationsModule,
   ],
   exports: [DictionaryManagerComponent],
 })

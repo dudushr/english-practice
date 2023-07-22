@@ -1,0 +1,16 @@
+<BR><BR>
+<div style="width:100%;text-align: center;border:" >
+    <mat-button-toggle-group name="practiceType" aria-label="Font Style" [formControl]="practiceTypeControl">
+      <mat-button-toggle value="Reading">Reading</mat-button-toggle>
+      <mat-button-toggle value="Writing">Writing</mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
+  
+
+<div *ngIf="practiceTypeControl.value === 'Reading'" style="width:100%;text-align: center;">
+  <myorg-english-practice></myorg-english-practice>
+</div>
+
+<div *ngIf="practiceTypeControl.value === 'Writing'" style="width:100%;text-align: center;">
+    <myorg-english-practice-writing></myorg-english-practice-writing>
+</div>

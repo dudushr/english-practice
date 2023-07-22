@@ -24,7 +24,7 @@ export class DictionaryManagerComponent  implements OnInit {
   newWord: EnglishWordComponent = new EnglishWordComponent();
  // dataSource : EnglishWordComponent[] = [ ];
   dataSource = new MatTableDataSource<EnglishWordComponent>();
-  displayedColumns: string[] = ['English', 'Hebrew', 'Level', 'LevelWrite', 'Date', 'Edit', 'Remove'];
+  displayedColumns: string[] = ['English', 'Hebrew', 'Level', 'LevelWrite', 'IncludeWriteTest', 'Date', 'Edit', 'Remove'];
   _jsonURL = "dictionary.json"
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;  
@@ -177,10 +177,11 @@ export class DictionaryManagerComponent  implements OnInit {
     }else if(sortState.active === "Level"){
       sortType = "level";
     }else if(sortState.active === "Date"){
-      sortType = "lastDictationDate";
-
-
-      
+      sortType = "lastDictationDate";  
+    }else if(sortState.active === "LevelWrite"){
+      sortType = "levelWrite";  
+    }else if(sortState.active === "IncludeWriteTest"){
+      sortType = "includeWriteTest";  
     }
 
 
@@ -231,6 +232,27 @@ export class DictionaryManagerComponent  implements OnInit {
     }
       
     return className;
+  }
+
+
+   updateIncludeWriteTest($event: any, word: EnglishWordComponent){
+      word.includeWriteTest = $event.checked
+   
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          Authorization: 'my-auth-token'
+        })
+      };
+  
+      const httpParams = new HttpParams()
+      .append("wordToSave", JSON.stringify(word))
+      .append("uid", this.loginService.getUser());
+  
+      
+      this.http.post(this.epService.getServerUrl() + "/dictionary/update", httpParams, httpOptions).subscribe(request =>{
+        console.log("Finished")
+      });
   }
 
 }

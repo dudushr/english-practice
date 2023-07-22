@@ -13,6 +13,7 @@ export class EnglishWordComponent implements OnInit {
   hebrewWord: Array<string> = new Array<string>();
   level = 0;
   levelWrite = 0;
+  includeWriteTest = false;
   lastDictationDate = new Date();
   clueFileName = "";
 
@@ -51,6 +52,10 @@ export class EnglishWordComponent implements OnInit {
 
     if(word.levelWrite){
       this.levelWrite = word.levelWrite;
+    }
+
+    if(word.includeWriteTest){
+      this.includeWriteTest = word.includeWriteTest;
     }
   }
 
